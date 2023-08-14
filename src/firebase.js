@@ -1,3 +1,7 @@
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
+
 const firebaseConfig = {
     apiKey: "AIzaSyC-JvB2RXrsup4P9oH8IgCwUm1W5Ce08dQ",
     authDomain: "tricyclebooking-ebe95.firebaseapp.com",
