@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/create-modal.css">
+    <link rel="stylesheet" href="../css/drivers.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="logo-tric">
+                <img src="../assets/logoTricyApp.png" alt="logo-tric">
+            </div>
+            <h2>Admin</h2>
+            <ul>
+                <li><a href="#" class="reveal-content" data-target="dashboard"><img src="../assets/dashboard.png" alt="icon">Dashboard</a></li>
+                <li><a href="#"><img src="../assets/users.png" alt="icon">USER</a></li>
+                <li><a href="#" class="reveal-content" data-target="drivers"><img src="../assets/driver.png" alt="icon">DRIVERS</a></li>
+                <li><a href="#"><img src="../assets/report.png" alt="icon">REPORTS</a></li>
+                <li id="logout"><a href="../index.html"><img src="../assets/logout.png" alt="icon">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- Default content displayed -->
+            <div id="dashboard" class="page active">
+                <h1>Dashboard</h1>
+                <p>Welcome to Tricycle Booking Website!</p>
+            </div>
+
+            <!-- Content revealed when "Drivers" link is clicked -->
+            <div id="drivers" class="page">
+                <h1>Drivers</h1>
+                <p>Driver information goes here.</p>
+                <button id="addDriverBtn">Add Driver</button>
+                <div class="body-content">
+                    <div class="modal-wrapper">
+                        <div id="create-modal" class="create-modal">
+                            <div class="create-modal-content">
+                                <span class="create-modal-close" id="closeModalBtn">&times;</span>
+                                <h2>Add Driver Form</h2>
+                                <hr>
+                                <form class="create-form">
+                                    <input type="text" name="fullname" id="name" placeholder="Name" required>
+                                    <input type="number" name="franchiseNumber" id="fn" placeholder="Franchise Number" required>
+                                    <input type="number" name="driverRate" id="dr" placeholder="Driver Rate (1-5)" required>
+                                    <input type="text" name="motorType" id="mt" placeholder="Motor Type" required>
+                                    <input type="text" name="qrcode" id="qrc" placeholder="QR Code" required>
+                                    <div class="buttons">
+                                        <button type="submit" id="submit-btn" class="submit-btn">Submit</button>
+                                        <button type="cancel" id="cancel-btn">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include jQuery/js library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../jquery/jquery.js"></script>
+<script src="../jquery/create-modal.js"></script>
+<script type="module" src="../src/firebase.js"></script>
+<script type="module" src="../src/crud.js"></script>
+
+</body>
+</html>
