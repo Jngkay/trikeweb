@@ -9,6 +9,7 @@ const firebaseConfig = {
   };  
   
     firebase.initializeApp(firebaseConfig);
+  
 
     function form() {
       const fullnameV = document.getElementById("name").value;
