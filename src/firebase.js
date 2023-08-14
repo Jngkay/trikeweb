@@ -8,7 +8,7 @@ const firebaseConfig = {
     appId: "1:211757260511:web:08ab4ab453e1eb6c81d36a"
   };  
   
-  firebaseConfig.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
   
   function form() {
     const fullnameV = document.getElementById("name").value;
@@ -32,8 +32,6 @@ const firebaseConfig = {
         motorType: motorTypeV,
         qrcode: qrcodeV
       });
-
-
   
       alert("Data Inserted");
       document.getElementById("name").value = "";
