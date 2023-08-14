@@ -10,12 +10,5 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
   
-  function form() {
-    const fullnameV = document.getElementById("name").value;
-    const franchiseNumberV = document.getElementById("fn").value;
-    const driverRateV = document.getElementById("dr").value;
-    const motorTypeV = document.getElementById("mt").value;
-    const qrcodeV = document.getElementById("qrc").value;
-    console.log(fullnameV, franchiseNumberV, driverRateV, motorTypeV, qrcodeV);
-};
+  
 
