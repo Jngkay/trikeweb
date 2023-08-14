@@ -81,16 +81,15 @@
 
 $("#submit-btn").click(function(e){
     e.preventDefault();
-    form();
     firebase
       .database()
       .ref("drivers/" + $("#qrc").val())
       .set({
-        fullname: fullnameV,
-        franchiseNumber: franchiseNumberV,
-        driverRate: driverRateV,
-        motorType: motorTypeV,
-        qrcode: qrcodeV
+        fullname: $("#qrc").val(),
+        franchiseNumber: $("#fn").val(),
+        driverRate: $("#dr").val(),
+        motorType: $("#mt").val(),
+        qrcode: $("#qrc").val()
       });
 
     alert("Data Inserted");
