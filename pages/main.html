@@ -84,7 +84,7 @@ $("#submit-btn").click(function(e){
     form();
     firebase
       .database()
-      .ref("drivers/" + driverUid)
+      .ref("drivers/" + qrcodeV)
       .set({
         fullname: fullnameV,
         franchiseNumber: franchiseNumberV,
