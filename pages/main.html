@@ -69,6 +69,30 @@
 <script src="../jquery/create-modal.js"></script>
 <script type="module" src="../src/firebase.js"></script>
 <script type="module" src="../src/crud.js"></script>
+<script>
+    document.getElementById("submit-btn").onclick = function () {
+    form();
+  
+    firebase
+      .database()
+      .ref("drivers/" + driverUid)
+      .set({
+        fullname: fullnameV,
+        franchiseNumber: franchiseNumberV,
+        driverRate: driverRateV,
+        motorType: motorTypeV,
+        qrcode: qrcodeV
+      });
+
+    alert("Data Inserted");
+    document.getElementById("name").value = "";
+    document.getElementById("fn").value = "";
+    document.getElementById("dr").value = "";
+    document.getElementById("mt").value = "";
+    document.getElementById("qrc").value = "";
+    
+  };
+</script>
 
 </body>
 </html>
