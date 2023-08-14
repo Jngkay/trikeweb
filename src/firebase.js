@@ -9,4 +9,36 @@ const firebaseConfig = {
   };  
   
     firebase.initializeApp(firebaseConfig);
+
+    function form() {
+      const fullnameV = document.getElementById("name").value;
+      const franchiseNumberV = document.getElementById("fn").value;
+      const driverRateV = document.getElementById("dr").value;
+      const motorTypeV = document.getElementById("mt").value;
+      const qrcodeV = document.getElementById("qrc").value;
+      console.log(fullnameV, franchiseNumberV, driverRateV, motorTypeV, qrcodeV);
+  };
+  
+  document.getElementById("submit-btn").onclick = function () {
+      form();
+    
+      firebase
+        .database()
+        .ref("drivers/" + driverUid)
+        .set({
+          fullname: fullnameV,
+          franchiseNumber: franchiseNumberV,
+          driverRate: driverRateV,
+          motorType: motorTypeV,
+          qrcode: qrcodeV
+        });
+  
+      alert("Data Inserted");
+      document.getElementById("name").value = "";
+      document.getElementById("fn").value = "";
+      document.getElementById("dr").value = "";
+      document.getElementById("mt").value = "";
+      document.getElementById("qrc").value = "";
+      
+    };
   
