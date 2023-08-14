@@ -1,7 +1,3 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
-
 const firebaseConfig = {
     apiKey: "AIzaSyC-JvB2RXrsup4P9oH8IgCwUm1W5Ce08dQ",
     authDomain: "tricyclebooking-ebe95.firebaseapp.com",
@@ -12,8 +8,7 @@ const firebaseConfig = {
     appId: "1:211757260511:web:08ab4ab453e1eb6c81d36a"
   };  
   
-  const db = getDatabase();
-  const auth = getAuth();
+  firebaseConfig.initializeApp(firebaseConfig);
   
   function form() {
     const fullnameV = document.getElementById("name").value;
@@ -27,14 +22,17 @@ const firebaseConfig = {
   document.getElementById("submit-btn").onclick = function () {
       form();
     
-      const driversRef = ref(db, "drivers/" + driverUid);
-      set(driversRef, {
+      firebase
+      .database()
+      .ref("drivers/" + driverUid)
+      .set({
         fullname: fullnameV,
         franchiseNumber: franchiseNumberV,
         driverRate: driverRateV,
         motorType: motorTypeV,
         qrcode: qrcodeV
       });
+
 
   
       alert("Data Inserted");
