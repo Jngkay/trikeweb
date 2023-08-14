@@ -8,31 +8,30 @@ const firebaseConfig = {
     appId: "1:211757260511:web:08ab4ab453e1eb6c81d36a"
   };  
   
-    firebase.initializeApp(firebaseConfig);
+  const db = getDatabase();
+  const auth = getAuth();
   
-
-    function form() {
-      const fullnameV = document.getElementById("name").value;
-      const franchiseNumberV = document.getElementById("fn").value;
-      const driverRateV = document.getElementById("dr").value;
-      const motorTypeV = document.getElementById("mt").value;
-      const qrcodeV = document.getElementById("qrc").value;
-      console.log(fullnameV, franchiseNumberV, driverRateV, motorTypeV, qrcodeV);
-  };
+  function form() {
+    const fullnameV = document.getElementById("name").value;
+    const franchiseNumberV = document.getElementById("fn").value;
+    const driverRateV = document.getElementById("dr").value;
+    const motorTypeV = document.getElementById("mt").value;
+    const qrcodeV = document.getElementById("qrc").value;
+    console.log(fullnameV, franchiseNumberV, driverRateV, motorTypeV, qrcodeV);
+  }
   
   document.getElementById("submit-btn").onclick = function () {
       form();
     
-      firebase
-        .database()
-        .ref("drivers/" + driverUid)
-        .set({
-          fullname: fullnameV,
-          franchiseNumber: franchiseNumberV,
-          driverRate: driverRateV,
-          motorType: motorTypeV,
-          qrcode: qrcodeV
-        });
+      const driversRef = ref(db, "drivers/" + driverUid);
+      set(driversRef, {
+        fullname: fullnameV,
+        franchiseNumber: franchiseNumberV,
+        driverRate: driverRateV,
+        motorType: motorTypeV,
+        qrcode: qrcodeV
+      });
+
   
       alert("Data Inserted");
       document.getElementById("name").value = "";
