@@ -1,1 +1,37 @@
-hello world Tracy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <title>Login | TricycleBooking</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h2>Welcome to Tricycle Booking WebApp</h2>
+        </div>
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="login-form" class="login-form">
+                <input class="login-input" id="email" type="email" name="email" placeholder="Email" required>
+                <input class="login-input" id="pword" type="password" name="password" placeholder="Password" required>
+                <button class="login-button" type="submit" id="login" name="login" value="login">Login</button>
+                <div class="links">
+                    <a href="#">forget password?</a>
+                    <a href="#">sign up</a>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="src/firebase.js"></script>
+    <script src="src/login-process.js"></script>  
+    
+</body>
+</html>
