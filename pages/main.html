@@ -79,7 +79,8 @@
     console.log(fullnameV, franchiseNumberV, driverRateV, motorTypeV, qrcodeV);
 };
 
-$("#submit-btn").click(function(){
+$("#submit-btn").click(function(e){
+    e.preventDefault();
     form();
     firebase
       .database()
