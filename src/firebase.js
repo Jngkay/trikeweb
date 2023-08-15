@@ -20,7 +20,6 @@ const firebaseConfig = {
       .set({
         fullname: $("#name").val(),
         franchiseNumber: $("#fn").val(),
-        driverRate: $("#dr").val(),
         motorType: $("#mt").val(),
         qrcode: $("#qrc").val()
       });
@@ -28,7 +27,6 @@ const firebaseConfig = {
     alert("Data Inserted");
     document.getElementById("name").value = "";
     document.getElementById("fn").value = "";
-    document.getElementById("dr").value = "";
     document.getElementById("mt").value = "";
     document.getElementById("qrc").value = "";
     
