@@ -35,7 +35,32 @@ const firebaseConfig = {
 });
 
 /*Read Method */
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("drivers/");
 
+  databaseRef.on("value", function(snapshot) {
+    const tableBody = $(".tableBody"); // Get the table body element
+
+    // Clear existing table rows
+    //tableBody.empty();
+
+    snapshot.forEach(function(childSnapshot) {
+      const driverData = childSnapshot.val();
+      const row = $("<tr>");
+      row.append($("<td>").text(driverData.fullname));
+      row.append($("<td>").text(driverData.franchiseNumber));
+      row.append($("<td>").text(driverData.motorType));
+      row.append($("<td>").text(driverData.qrcode));
+
+      const actionCell = $("<td>");
+      actionCell.append($("<button>").text("Edit"));
+      actionCell.append($("<button>").text("Delete"));
+
+      row.append(actionCell);
+      tableBody.append(row);
+    });
+  });
+});
     
 
 
