@@ -34,3 +34,10 @@ const firebaseConfig = {
     
 });
 
+/*Read Method */
+
+    
+
+
+/*Update Method */
+/*Delete Method */

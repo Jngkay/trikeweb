@@ -37,6 +37,59 @@
                 <p>Driver information goes here.</p>
                 <button id="addDriverBtn">Add Driver</button>
                 <div class="body-content">
+                    
+                    <table>
+                        <tr>
+                            <th>Fullname</th>
+                            <th>Franchise Number</th>
+                            <th>Motor Type</th>
+                            <th>QRcode</th>
+                            <th>Action</th>
+                        </tr>
+                        <script>
+                            $(document).ready(function() {
+                                const database = firebase.database();
+                                const driversRef = database.ref("drivers");
+                                
+                                function populateDriversTable() {
+                                    const tbody = $("#driversTable tbody");
+                                    tbody.empty(); // Clear existing rows
+                                    
+                                    driversRef.once("value", snapshot => {
+                                        snapshot.forEach(driverSnapshot => {
+                                            const driver = driverSnapshot.val();
+                                            const row = `
+                                                <tr>
+                                                    <td>${driver.fullname}</td>
+                                                    <td>${driver.franchiseNumber}</td>
+                                                    <td>${driver.driverRate}</td>
+                                                    <td>${driver.motorType}</td>
+                                                    <td>${driver.qrcode}</td>
+                                                    <td>
+                                                        <button class="edit-btn" data-driver-id="${driverSnapshot.key}">Edit</button>
+                                                        <button class="delete-btn" data-driver-id="${driverSnapshot.key}">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            `;
+                                            tbody.append(row);
+                                        });
+                                    });
+                                }
+                                    populateDriversTable();
+                        </script>
+                        
+                    </table>
+
+
+
+
+
+
+
+
+
+
+                    <!--START: Create Modal Section-->
                     <div class="modal-wrapper">
                         <div id="create-modal" class="create-modal">
                             <div class="create-modal-content">
@@ -57,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <!--END: Create Modal Section-->
                 </div>
             </div>
         </div>
