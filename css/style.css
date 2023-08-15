@@ -15,7 +15,7 @@
     flex: 0 0 200px;
     z-index: 1;
     height: 100%;
-    background-color: gray; /* Adjust the background color */
+    background-color: lightgray; /* Adjust the background color */
     color: white; /* Adjust the text color */
     padding: 20px;
     text-align: center;
