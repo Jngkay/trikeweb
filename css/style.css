@@ -16,7 +16,7 @@
     z-index: 1;
     height: 100%;
     background-color: lightgray; /* Adjust the background color */
-    color: white; /* Adjust the text color */
+    color: black; /* Adjust the text color */
     padding: 20px;
     text-align: center;
     position: relative;
@@ -50,7 +50,7 @@ li {
 }
 
 a {
-    color: white; /* Adjust the link color */
+    color: black; /* Adjust the link color */
     text-decoration: none;
     display: flex;
     align-items: center;
