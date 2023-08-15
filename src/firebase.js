@@ -10,5 +10,27 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
   
-  
+
+  /*Create Method */
+  $("#submit-btn").click(function(e){
+    e.preventDefault();
+    firebase
+      .database()
+      .ref("drivers/" + $("#qrc").val())
+      .set({
+        fullname: $("#qrc").val(),
+        franchiseNumber: $("#fn").val(),
+        driverRate: $("#dr").val(),
+        motorType: $("#mt").val(),
+        qrcode: $("#qrc").val()
+      });
+
+    alert("Data Inserted");
+    document.getElementById("name").value = "";
+    document.getElementById("fn").value = "";
+    document.getElementById("dr").value = "";
+    document.getElementById("mt").value = "";
+    document.getElementById("qrc").value = "";
+    
+});
 
