@@ -18,7 +18,7 @@ const firebaseConfig = {
       .database()
       .ref("drivers/" + $("#qrc").val())
       .set({
-        fullname: $("#qrc").val(),
+        fullname: $("#name").val(),
         franchiseNumber: $("#fn").val(),
         driverRate: $("#dr").val(),
         motorType: $("#mt").val(),
