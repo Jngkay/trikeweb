@@ -14,16 +14,19 @@ const firebaseConfig = {
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
+
     const fullname = $("#fullname").val();
     const email = $("#email").val();
     const pword = $("#pword").val();
     const fn = $("#fn").val();
     const mt = $("#mt").val();
     const qrc = $("#qrc").val();
+
     if (fullname === '' || email === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
       alert("Please fill in all fields before submitting.");
       return;
     }
+
     firebase
       .database()
       .ref("drivers/" + $("#qrc").val())
@@ -46,7 +49,7 @@ const firebaseConfig = {
     
 });
 
-
+/*Read Method*/
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
   const tableBody = $(".tableBody"); // Get the table body element
@@ -80,7 +83,7 @@ $(document).ready(function(){
   });
 });
 
-/*Read Method*/
+
 
     
 
