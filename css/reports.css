@@ -36,7 +36,9 @@ body {
     border: solid 1px black;
 }
 
-.userTable-wrapper{
+
+
+.reportsTable-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,18 +48,18 @@ body {
     
 }
 
-.userTable {
+.reportsTable {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
 }
 
-.userTable th, .userTable td {
+.reportsTable th, .reportsTable td {
     padding: 10px;
     border: 1px solid black;
 }
 
-.userTable th {
+.reportsTable th {
     background-color: whitesmoke;
     font-weight: bold;
 }

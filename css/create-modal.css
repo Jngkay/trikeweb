@@ -14,16 +14,18 @@
 
 .modal-wrapper{
     display: none;
-    position: relative;
+    position: fixed;
     width: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0, 0.4);
     height: 100%;
+    z-index: 1000;
 }
 .create-modal{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .create-modal-content{

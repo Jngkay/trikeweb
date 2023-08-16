@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2f3e7b9e9c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/users.css">
     
     <title>Users | Tricycle Booking WebApp</title>
@@ -11,12 +12,58 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <h2>Registered User</h2>
+            <h2>REGISTERED USER</h2>
             <div class="searchbar">
                 <input type="text" class="searchInput" placeholder="search" id="searchInput" >
             </div>
         </div>
+
+        <div class="content-body">
+
+            <div class="userTable-wrapper">
+                <table class="userTable">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
         
+        <div class="backnav">
+            <a href="main.html"><button type="button" class="backbtn" id="back-btn"><i class="fa-solid fa-arrow-left"></i></button></a>
+        </div>
+
     </div>
+
+    <script src="../src/firebase.js"></script>
+    <script src="../jquery/back-btn.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+    <script>
+        // Reference to your users in the database
+        var usersRef = firebase.database().ref("users");
+      
+        // Get a reference to the user table element
+        var userTable = $(".userTable");
+      
+        // Fetch data and update the table
+        usersRef.on("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var userData = childSnapshot.val();
+            var newRow = $("<tr>");
+            
+            newRow.append($("<td>").text(userData.firstName));
+            newRow.append($("<td>").text(userData.lastName));
+            newRow.append($("<td>").text(userData.email));
+            newRow.append($("<td>").text(userData.phone));
+      
+            userTable.append(newRow);
+          });
+        });
+      </script>
+      
 </body>
 </html>
