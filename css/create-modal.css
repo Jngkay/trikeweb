@@ -19,7 +19,10 @@
     overflow: auto;
     background-color: rgb(0, 0, 0, 0.4);
     height: 100%;
-    z-index: 1000;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    padding-left: 115px;
 }
 .create-modal{
     display: flex;

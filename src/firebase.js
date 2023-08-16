@@ -14,41 +14,61 @@ const firebaseConfig = {
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
+    const fullname = $("#fullname").val();
+    const email = $("#email").val();
+    const pword = $("#pword").val();
+    const fn = $("#fn").val();
+    const mt = $("#mt").val();
+    const qrc = $("#qrc").val();
+    if (fullname === '' || email === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
     firebase
       .database()
       .ref("drivers/" + $("#qrc").val())
       .set({
-        fullname: $("#name").val(),
-        franchiseNumber: $("#fn").val(),
-        motorType: $("#mt").val(),
-        qrcode: $("#qrc").val()
+        fullname: fullname,
+        email: email,
+        pword: pword,
+        fn: fn,
+        mt: mt,
+        qrc: qrc
       });
 
     alert("Data Inserted");
-    document.getElementById("name").value = "";
+    document.getElementById("fullname").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("pword").value = "";
     document.getElementById("fn").value = "";
     document.getElementById("mt").value = "";
     document.getElementById("qrc").value = "";
     
 });
 
-/*Read Method */
+
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
+  const tableBody = $(".tableBody"); // Get the table body element
 
+  // This function will clear the existing data rows from the table
+  function clearDataRows() {
+    tableBody.find("tr:gt(0)").remove();
+  }
+
+  // Attach the "value" event listener
   databaseRef.on("value", function(snapshot) {
-    const tableBody = $(".tableBody"); // Get the table body element
-
-    // Clear existing table rows
-    //tableBody.empty();
+    clearDataRows(); // Clear the existing data rows
 
     snapshot.forEach(function(childSnapshot) {
       const driverData = childSnapshot.val();
       const row = $("<tr>");
       row.append($("<td>").text(driverData.fullname));
-      row.append($("<td>").text(driverData.franchiseNumber));
-      row.append($("<td>").text(driverData.motorType));
-      row.append($("<td>").text(driverData.qrcode));
+      row.append($("<td>").text(driverData.email));
+      row.append($("<td>").text(driverData.pword));
+      row.append($("<td>").text(driverData.fn));
+      row.append($("<td>").text(driverData.mt));
+      row.append($("<td>").text(driverData.qrc));
 
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit"));
@@ -59,6 +79,9 @@ $(document).ready(function(){
     });
   });
 });
+
+/*Read Method*/
+
     
 
 

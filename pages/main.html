@@ -41,7 +41,9 @@
                         <table class="tableBody">
                             <tr>
                                 <th>Fullname</th>
-                                <th>Franchise Number</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Franchise #</th>
                                 <th>Motor Type</th>
                                 <th>QRcode</th>
                                 <th>Action</th>
@@ -50,18 +52,21 @@
                     </div>
                 </div>
             </div>
-             <!--START: Create Modal Section-->
-             <div class="modal-wrapper">
+            
+            <!--START: Create Modal Section-->
+            <div class="modal-wrapper">
                 <div id="create-modal" class="create-modal">
                     <div class="create-modal-content">
                         <span class="create-modal-close" id="closeModalBtn">&times;</span>
                         <h2>Add Driver Form</h2>
                         <hr>
                         <form class="create-form">
-                            <input type="text" name="fullname" id="name" placeholder="Name" required>
-                            <input type="number" name="franchiseNumber" id="fn" placeholder="Franchise Number" required>
-                            <input type="text" name="motorType" id="mt" placeholder="Motor Type" required>
-                            <input type="text" name="qrcode" id="qrc" placeholder="QR Code" required>
+                            <input type="text" name="fullname" id="fullname" placeholder="Fullname" required>
+                            <input type="email" name="email" id="email" placeholder="Email" required>
+                            <input type="text" name="pword" id="pword" placeholder="Password" required>
+                            <input type="number" name="fn" id="fn" placeholder="Franchise Number" required>
+                            <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
+                            <input type="text" name="qrc" id="qrc" placeholder="QR Code" required>
                             <div class="buttons">
                                 <button type="submit" id="submit-btn" class="submit-btn">Submit</button>
                                 <button type="cancel" id="cancel-btn">Cancel</button>
