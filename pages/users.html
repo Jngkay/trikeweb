@@ -40,30 +40,7 @@
 
     <script src="../src/firebase.js"></script>
     <script src="../jquery/back-btn.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
-    <script>
-        // Reference to your users in the database
-        var usersRef = firebase.database().ref("users");
-      
-        // Get a reference to the user table element
-        var userTable = $(".userTable");
-      
-        // Fetch data and update the table
-        usersRef.on("value", function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            var userData = childSnapshot.val();
-            var newRow = $("<tr>");
-            
-            newRow.append($("<td>").text(userData.firstName));
-            newRow.append($("<td>").text(userData.lastName));
-            newRow.append($("<td>").text(userData.email));
-            newRow.append($("<td>").text(userData.phone));
-      
-            userTable.append(newRow);
-          });
-        });
-      </script>
-      
+
 </body>
 </html>

@@ -49,7 +49,7 @@ const firebaseConfig = {
     
 });
 
-/*Read Method*/
+/*Drivers Read Method*/
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
   const tableBody = $(".tableBody"); // Get the table body element
@@ -83,7 +83,37 @@ $(document).ready(function(){
   });
 });
 
+/*Users Read Method */
+$(document).ready(function() {
+  //var userTable = $(".userTable");
 
+  // Reference to your users data in the database
+  var usersRef = firebase.database().ref("users/");
+
+  // Retrieve user data and populate the table
+  usersRef.on("value", function(snapshot) {
+    console.log(snapshot.val());
+    //userTable.empty(); // Clear existing rows
+
+    snapshot.forEach(function(childSnapshot) {
+      var userData = childSnapshot.val();
+      console.log(userData);
+
+     /* var firstname = userData.firstname;
+      var lastname = userData.lastname;
+      var email = userData.email;
+      var phone = userData.phone;
+
+      var newRow = $("<tr>");
+      newRow.append($("<td>").text(firstname));
+      newRow.append($("<td>").text(lastname));
+      newRow.append($("<td>").text(email));
+      newRow.append($("<td>").text(phone));
+
+      userTable.append(newRow);*/
+    });
+  });
+});
 
     
 
