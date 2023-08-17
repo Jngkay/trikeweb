@@ -13,7 +13,7 @@ const firebaseConfig = {
 
   /*Create Method */
   $("#submit-btn").click(function(e){
-    e.preventDefault();
+    //e.preventDefault();
 
     const fullname = $("#fullname").val();
     const email = $("#email").val();
@@ -85,21 +85,24 @@ $(document).ready(function(){
 
 /*Users Read Method */
 $(document).ready(function() {
-  //var userTable = $(".userTable");
-
+  var userTable = $(".userTable");
   // Reference to your users data in the database
   var usersRef = firebase.database().ref("users/");
 
+  function clearUserData() {
+    userTable.find("tr:gt(0)").remove();
+  }
+
   // Retrieve user data and populate the table
   usersRef.on("value", function(snapshot) {
-    console.log(snapshot.val());
-    //userTable.empty(); // Clear existing rows
+    //console.log(snapshot.val());
+    clearUserData(); // Clear existing rows
 
     snapshot.forEach(function(childSnapshot) {
       var userData = childSnapshot.val();
-      console.log(userData);
+      //console.log(userData);
 
-     /* var firstname = userData.firstname;
+      var firstname = userData.firstname;
       var lastname = userData.lastname;
       var email = userData.email;
       var phone = userData.phone;
@@ -110,7 +113,7 @@ $(document).ready(function() {
       newRow.append($("<td>").text(email));
       newRow.append($("<td>").text(phone));
 
-      userTable.append(newRow);*/
+      userTable.append(newRow);
     });
   });
 });
