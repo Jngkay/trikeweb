@@ -21,6 +21,7 @@ const firebaseConfig = {
     const fn = $("#fn").val();
     const mt = $("#mt").val();
     const qrc = $("#qrc").val();
+    const available = document.getElementById('available').checked;
 
     if (fullname === '' || email === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
       alert("Please fill in all fields before submitting.");
@@ -36,7 +37,8 @@ const firebaseConfig = {
         pword: pword,
         fn: fn,
         mt: mt,
-        qrc: qrc
+        qrc: qrc,
+        available: available
       });
 
     alert("Data Inserted");
@@ -46,6 +48,7 @@ const firebaseConfig = {
     document.getElementById("fn").value = "";
     document.getElementById("mt").value = "";
     document.getElementById("qrc").value = "";
+    document.getElementById("available").value = "";
     
 });
 
@@ -72,6 +75,13 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.mt));
       row.append($("<td>").text(driverData.qrc));
+      row.append($("<td>").text(driverData.available));
+
+      /*if (driverData.available) {
+        row.append($("<td>").text("Available"));
+      } else {
+        row.append($("<td>").text("Not Available"));
+      }*/
 
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit"));

@@ -46,6 +46,7 @@
                                 <th>Franchise #</th>
                                 <th>Motor Type</th>
                                 <th>QRcode</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </table>
@@ -67,6 +68,8 @@
                             <input type="number" name="fn" id="fn" placeholder="Franchise Number" required>
                             <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
                             <input type="text" name="qrc" id="qrc" placeholder="QR Code" required>
+                            <label for="available">Available:</label>
+                            <input type="checkbox" id="available" name="available">
                             <div class="buttons">
                                 <button type="submit" id="submit-btn" class="submit-btn">Submit</button>
                                 <button type="cancel" id="cancel-btn">Cancel</button>
