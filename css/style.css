@@ -12,12 +12,12 @@
 }
 
 .sidebar {
-    flex: 0 0 200px;
+    flex: 0 0 170px;
     z-index: 1;
     height: 100%;
     background-color: lightgray; /* Adjust the background color */
     color: black; /* Adjust the text color */
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     position: relative;
     top: 0;
@@ -32,7 +32,7 @@
 }
 
 .wrapper .sidebar ul li img{
-    width: 50px;
+    width: 45px;
     height: auto;
 }
 
@@ -42,11 +42,14 @@ h2 {
 
 ul {
     list-style: none;
-    padding: 0 25px;
+    padding: 0 10px;
 }
 
 li {
     margin-bottom: 15px; /* Add spacing between list items */
+}
+li a:hover{
+    border-bottom: solid 1px white;
 }
 
 a {
@@ -55,10 +58,9 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 16px;
 }
-li a:hover{
-    border-bottom: solid 1px white;
-}
+
 
 .content {
     flex: 1;
@@ -66,7 +68,7 @@ li a:hover{
     justify-content: center;
     text-align: center;
     padding-top: 10px;
-    background-color: #f7f7f7;
+    background-color: white;
     position: relative;
     z-index: 0;
 }

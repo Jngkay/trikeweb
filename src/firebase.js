@@ -21,6 +21,7 @@ const firebaseConfig = {
     const address = $("#address").val();
     const pword = $("#pword").val();
     const fn = $("#fn").val();
+    const plateNo = $("#plateNo").val();
     const mt = $("#mt").val();
     const qrc = $("#qrc").val();
     const available = document.getElementById('available').checked;
@@ -32,7 +33,7 @@ const firebaseConfig = {
       return;
     }
 
-    if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
+    if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || plateNo === '' || mt === '' || qrc === '') {
       alert("Please fill in all fields before submitting.");
       return;
     }
@@ -54,6 +55,7 @@ const firebaseConfig = {
           address: address,
           pword: pword,
           fn: fn,
+          plateNo: plateNo,
           mt: mt,
           qrc: qrc,
           available: available,
@@ -68,6 +70,7 @@ const firebaseConfig = {
         document.getElementById("address").value = "";
         document.getElementById("pword").value = "";
         document.getElementById("fn").value = "";
+        document.getElementById("plateNo").value = "";
         document.getElementById("mt").value = "";
         document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
@@ -101,6 +104,7 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.address));
       row.append($("<td>").text(driverData.pword));
       row.append($("<td>").text(driverData.fn));
+      row.append($("<td>").text(driverData.plateNo));
       row.append($("<td>").text(driverData.mt));
       row.append($("<td>").text(driverData.qrc));
       row.append($("<td>").text(driverData.available));
