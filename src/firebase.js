@@ -88,7 +88,7 @@ $(document).ready(function(){
   }
 
   // Attach the "value" event listener
-  databaseRef.on("value", function(snapshot) {
+  databaseRef.orderByChild("fullname").on("value", function(snapshot) {
     clearDataRows(); // Clear the existing data rows
 
     snapshot.forEach(function(childSnapshot) {
@@ -107,7 +107,9 @@ $(document).ready(function(){
 
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit"));
-      actionCell.append($("<button>").text("Delete"));
+      actionCell.append($("<button>").text("Delete").click(function() {
+        deleteDriver(driverData.qrc);
+      }));
 
       row.append(actionCell);
       tableBody.append(row);
@@ -155,3 +157,16 @@ $(document).ready(function() {
 
 /*Update Method */
 /*Delete Method */
+function deleteDriver(driverId) {
+  const databaseRef = firebase.database().ref("drivers/");
+  const driverRef = databaseRef.child(driverId);
+
+  driverRef.remove()
+    .then(function() {
+      alert("Driver deleted successfully.");
+    })
+    .catch(function(error) {
+      console.error("Error deleting driver: ", error);
+      alert("An error occurred while deleting the driver.");
+    });
+}

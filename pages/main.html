@@ -43,7 +43,7 @@
                                 <th>Profile</th>
                                 <th>Fullname</th>
                                 <th>Email</th>
-                                <th>Contact Number</th>
+                                <th>Contact #</th>
                                 <th>Address</th>
                                 <th>Password</th>
                                 <th>Franchise #</th>
@@ -65,17 +65,23 @@
                         <h2>Add Driver Form</h2>
                         <hr>
                         <form class="create-form">
-                            <input type="file" id="profilePicture" accept="image/*">
-                            <input type="text" name="fullname" id="fullname" placeholder="Fullname" required>
-                            <input type="email" name="email" id="email" placeholder="Email" required>
-                            <input type="number" name="conNum" id="conNum" placeholder="Contact Number" required>
-                            <input type="text" name="address" id="address" placeholder="Address" required>
-                            <input type="text" name="pword" id="pword" placeholder="Password" required>
-                            <input type="number" name="fn" id="fn" placeholder="Franchise Number" required>
-                            <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
-                            <input type="text" name="qrc" id="qrc" placeholder="QR Code" required>
-                            <label for="available">Available:</label>
-                            <input type="checkbox" id="available" name="available">
+                            <div class="two-column">
+                                <div class="column">
+                                    <input type="file" id="profilePicture" accept="image/*">
+                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" required>
+                                    <input type="number" name="conNum" id="conNum" placeholder="Contact Number" required>
+                                    <input type="text" name="address" id="address" placeholder="Address" required>
+                                </div>
+                                <div class="column">
+                                    <input type="text" name="pword" id="pword" placeholder="Password" required>
+                                    <input type="number" name="fn" id="fn" placeholder="Franchise Number" required>
+                                    <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
+                                    <input type="text" name="qrc" id="qrc" placeholder="QR Code" required>
+                                    <label for="available">Available:</label>
+                                    <input type="checkbox" id="available" name="available">
+                                </div>
+                            </div>
                             <div class="buttons">
                                 <button type="submit" id="submit-btn" class="submit-btn">Submit</button>
                                 <button type="cancel" id="cancel-btn">Cancel</button>
@@ -85,6 +91,41 @@
                 </div>
             </div>
             <!--END: Create Modal Section-->
+
+            <!--START: Update Modal Section
+            <div class="modal-wrapper">
+                <div id="update-modal" class="update-modal">
+                    <div class="update-modal-content">
+                        <span class="update-modal-close" id="closeModalBtn">&times;</span>
+                        <h2>Update Driver</h2>
+                        <hr>
+                        <form class="update-form">
+                            <div class="two-column">
+                                <div class="column">
+                                    <input type="file" id="profilePicture" accept="image/*">
+                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" required>
+                                    <input type="number" name="conNum" id="conNum" placeholder="Contact Number" required>
+                                    <input type="text" name="address" id="address" placeholder="Address" required>
+                                </div>
+                                <div class="column">
+                                    <input type="text" name="pword" id="pword" placeholder="Password" required>
+                                    <input type="number" name="fn" id="fn" placeholder="Franchise Number" required>
+                                    <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
+                                    <input type="text" name="qrc" id="qrc" placeholder="QR Code" required>
+                                    <label for="available">Available:</label>
+                                    <input type="checkbox" id="available" name="available">
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <button type="submit" id="update-btn" class="update-btn">Submit</button>
+                                <button type="cancel" id="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            END: Update Modal Section-->
         </div>
     </div>
 
