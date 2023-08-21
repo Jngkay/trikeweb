@@ -13,42 +13,68 @@ const firebaseConfig = {
 
   /*Create Method */
   $("#submit-btn").click(function(e){
-    //e.preventDefault();
+    e.preventDefault();
 
     const fullname = $("#fullname").val();
     const email = $("#email").val();
+    const address = $("#address").val();
     const pword = $("#pword").val();
     const fn = $("#fn").val();
     const mt = $("#mt").val();
     const qrc = $("#qrc").val();
     const available = document.getElementById('available').checked;
+    const profilePictureInput = document.getElementById("profilePicture");
+    const profilePictureFile = profilePictureInput.files[0];
 
-    if (fullname === '' || email === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
+    if (!profilePictureFile) {
+      alert("Please select a profile picture.");
+      return;
+    }
+
+    if (fullname === '' || email === '' || address === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
       alert("Please fill in all fields before submitting.");
       return;
     }
 
-    firebase
-      .database()
-      .ref("drivers/" + $("#qrc").val())
-      .set({
-        fullname: fullname,
-        email: email,
-        pword: pword,
-        fn: fn,
-        mt: mt,
-        qrc: qrc,
-        available: available
-      });
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    const profilePictureRef = storageRef.child("profilePictures/" + qrc);
 
-    alert("Data Inserted");
-    document.getElementById("fullname").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("pword").value = "";
-    document.getElementById("fn").value = "";
-    document.getElementById("mt").value = "";
-    document.getElementById("qrc").value = "";
-    document.getElementById("available").value = "";
+    profilePictureRef.put(profilePictureFile).then(snapshot =>{
+      snapshot.ref.getDownloadURL().then(downloadURL =>{
+
+      firebase
+        .database()
+        .ref("drivers/" + $("#qrc").val())
+        .set({
+          fullname: fullname,
+          email: email,
+          address: address,
+          pword: pword,
+          fn: fn,
+          mt: mt,
+          qrc: qrc,
+          available: available,
+          profilePictureURL: downloadURL
+        });
+
+        alert("Data Inserted");
+        document.getElementById("profilePicture").value = "";
+        document.getElementById("fullname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("address").value = "";
+        document.getElementById("pword").value = "";
+        document.getElementById("fn").value = "";
+        document.getElementById("mt").value = "";
+        document.getElementById("qrc").value = "";
+        document.getElementById("available").value = "";
+
+      });
+    })
+
+    
+
+    
     
 });
 
@@ -69,13 +95,16 @@ $(document).ready(function(){
     snapshot.forEach(function(childSnapshot) {
       const driverData = childSnapshot.val();
       const row = $("<tr>");
+      row.append($("<td>").html(`<img src="${driverData.profilePictureURL}" class="profile-picture" alt="Profile Picture">`));
       row.append($("<td>").text(driverData.fullname));
       row.append($("<td>").text(driverData.email));
+      row.append($("<td>").text(driverData.address));
       row.append($("<td>").text(driverData.pword));
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.mt));
       row.append($("<td>").text(driverData.qrc));
       row.append($("<td>").text(driverData.available));
+      
 
       /*if (driverData.available) {
         row.append($("<td>").text("Available"));
