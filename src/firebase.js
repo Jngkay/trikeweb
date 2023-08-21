@@ -17,6 +17,7 @@ const firebaseConfig = {
 
     const fullname = $("#fullname").val();
     const email = $("#email").val();
+    const conNum = $("#conNum").val();
     const address = $("#address").val();
     const pword = $("#pword").val();
     const fn = $("#fn").val();
@@ -31,7 +32,7 @@ const firebaseConfig = {
       return;
     }
 
-    if (fullname === '' || email === '' || address === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
+    if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || mt === '' || qrc === '') {
       alert("Please fill in all fields before submitting.");
       return;
     }
@@ -49,6 +50,7 @@ const firebaseConfig = {
         .set({
           fullname: fullname,
           email: email,
+          conNum: conNum,
           address: address,
           pword: pword,
           fn: fn,
@@ -62,6 +64,7 @@ const firebaseConfig = {
         document.getElementById("profilePicture").value = "";
         document.getElementById("fullname").value = "";
         document.getElementById("email").value = "";
+        document.getElementById("conNum").value = "";
         document.getElementById("address").value = "";
         document.getElementById("pword").value = "";
         document.getElementById("fn").value = "";
@@ -71,10 +74,6 @@ const firebaseConfig = {
 
       });
     })
-
-    
-
-    
     
 });
 
@@ -98,19 +97,13 @@ $(document).ready(function(){
       row.append($("<td>").html(`<img src="${driverData.profilePictureURL}" class="profile-picture" alt="Profile Picture">`));
       row.append($("<td>").text(driverData.fullname));
       row.append($("<td>").text(driverData.email));
+      row.append($("<td>").text(driverData.conNum));
       row.append($("<td>").text(driverData.address));
       row.append($("<td>").text(driverData.pword));
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.mt));
       row.append($("<td>").text(driverData.qrc));
       row.append($("<td>").text(driverData.available));
-      
-
-      /*if (driverData.available) {
-        row.append($("<td>").text("Available"));
-      } else {
-        row.append($("<td>").text("Not Available"));
-      }*/
 
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit"));
