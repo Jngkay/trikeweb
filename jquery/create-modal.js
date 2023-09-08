@@ -2,6 +2,9 @@ $(document).ready(function() {
     // Get the modal and the buttons
     var modal = $(".modal-wrapper");
     var openModalBtn = $("#addDriverBtn");
+
+    var viewQR = $("#viewQR");
+
     var closeModalBtn = $("#closeModalBtn");
     var cancelBtn = $("#cancel-btn");
   
