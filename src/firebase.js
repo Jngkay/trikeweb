@@ -24,7 +24,6 @@ const firebaseConfig = {
     const fn = $("#fn").val();
     const plateNo = $("#plateNo").val();
     const mt = $("#mt").val();
-    const qrc = $("#qrc").val();
     const available = document.getElementById('available').checked;
     const profilePictureInput = document.getElementById("profilePicture");
     const profilePictureFile = profilePictureInput.files[0];
@@ -34,7 +33,7 @@ const firebaseConfig = {
       return;
     }
 
-    if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || plateNo === '' || mt === '' || qrc === '') {
+    if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || plateNo === '' || mt === '') {
       alert("Please fill in all fields before submitting.");
       return;
     }
@@ -58,7 +57,6 @@ const firebaseConfig = {
           fn: fn,
           plateNo: plateNo,
           mt: mt,
-          qrc: qrc,
           available: available,
           profilePictureURL: downloadURL
         });
@@ -75,7 +73,6 @@ const firebaseConfig = {
         document.getElementById("fn").value = "";
         document.getElementById("plateNo").value = "";
         document.getElementById("mt").value = "";
-        document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
 
         document.getElementById("cancel-btn").click();
