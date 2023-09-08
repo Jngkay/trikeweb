@@ -114,7 +114,7 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.mt));
 
       const qrCell = $("<td>");
-      qrCell.append($("<button class='viewQR'>").text("View QR Code"));
+      qrCell.append($("<button class='viewQR' data-info='"+driverData.fullname+"'>").text("View QR Code"));
       row.append(qrCell);
 
       row.append($("<td>").text(driverData.available));
