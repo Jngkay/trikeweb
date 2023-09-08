@@ -16,7 +16,7 @@ $(document).ready(function() {
       modal.show();
     });
 
-    $(document).on('click', '.viewQR', function() { qrmodal.show(); $("#qrModalView").data( "info", 'Test');});
+    $(document).on('click', '.viewQR', function() { qrmodal.show(); qrmodal.data( "info", 'Test');});
     $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); });
   
     // Close the modal
