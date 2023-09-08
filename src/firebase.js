@@ -10,7 +10,6 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
   
-
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
