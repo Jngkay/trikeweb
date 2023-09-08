@@ -1,9 +1,8 @@
 $(document).ready(function() {
     // Get the modal and the buttons
-    var allModal = $(".modal-wrapper");
+
     var modal = $("#AddDriverModal");
     var qrmodal = $("#qrModalView");
-
     var openModalBtn = $("#addDriverBtn");
 
     var closeModalBtn = $("#closeModalBtn");
@@ -18,17 +17,22 @@ $(document).ready(function() {
   
     // Close the modal
     closeModalBtn.click(function() {
-      allModal.hide();
+      modal.hide();
+      qrmodal.hide();
     });
 
     cancelBtn.click(function(){
-      allModal.hide();
+      modal.hide();
+      qrmodal.hide();
     });
   
     // Close the modal if the user clicks outside of it
     $(window).click(function(event) {
-      if (event.target === allModal[0]) {
-        allModal.hide();
+      if (event.target === qrmodal[0]) {
+        qrmodal.hide();
+      }
+      if (event.target === qrmodal[0]) {
+        qrmodal.hide();
       }
     });
   });
