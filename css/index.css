@@ -57,11 +57,11 @@ body {
     color: red;
 }
 #lightBox-loader{
-    background: #00000012;
+    background: #00000025;
     height: 100%;
     width: 100%;
     position: absolute;
-
+    display: none;
 }
 #lightBox-loader img{
     margin: 0 auto;

@@ -3,6 +3,9 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     event.preventDefault();
     var email = document.getElementById("email").value;
     var password = document.getElementById("pword").value;
+
+    document.getElementById("lightBox-loader").style.display = "block";
+
             
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(userCredential) {
