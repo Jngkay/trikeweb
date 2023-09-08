@@ -3,6 +3,9 @@ $(document).ready(function() {
 
     var modal = $("#AddDriverModal");
     var qrmodal = $("#qrModalView");
+    var getDataModal = $("#qrModalView").data('info');
+
+
     var openModalBtn = $("#addDriverBtn");
 
     var closeModalBtn = $("#closeModalBtn");
@@ -14,7 +17,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.viewQR', function() { qrmodal.show(); });
-    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); });
+    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); $("#qrModalView").data( "info", getDataModal );});
   
     // Close the modal
     closeModalBtn.click(function() {
