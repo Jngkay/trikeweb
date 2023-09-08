@@ -3,8 +3,6 @@ $(document).ready(function() {
 
     var modal = $("#AddDriverModal");
     var qrmodal = $("#qrModalView");
-    var getDataModal = $("#qrModalView").data('info');
-
 
     var openModalBtn = $("#addDriverBtn");
 
@@ -16,7 +14,7 @@ $(document).ready(function() {
       modal.show();
     });
 
-    $(document).on('click', '.viewQR', function() { qrmodal.show(); qrmodal.attr( "data-info", this.data('info'));});
+    $(document).on('click', '.viewQR', function() { qrmodal.show(); qrmodal.attr( "data-info", "Nik");});
     $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); });
   
     // Close the modal
