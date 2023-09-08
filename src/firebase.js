@@ -14,8 +14,8 @@ const firebaseConfig = {
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
+    
     document.getElementById("lightBox-loader").style.display = "block";
-
     const fullname = $("#fullname").val();
     const email = $("#email").val();
     const conNum = $("#conNum").val();
@@ -64,6 +64,8 @@ const firebaseConfig = {
         });
 
         alert("Data Inserted");
+        document.getElementById("lightBox-loader").style.display = "none";
+
         document.getElementById("profilePicture").value = "";
         document.getElementById("fullname").value = "";
         document.getElementById("email").value = "";
@@ -76,9 +78,10 @@ const firebaseConfig = {
         document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
 
+        ocument.getElementById("cancel-btn").click();
       });
     })
-    document.getElementById("lightBox-loader").style.display = "none";
+    
 });
 
 /*Drivers Read Method*/
