@@ -14,6 +14,7 @@ const firebaseConfig = {
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
+    document.getElementById("lightBox-loader").style.display = "block";
 
     const fullname = $("#fullname").val();
     const email = $("#email").val();
@@ -77,7 +78,7 @@ const firebaseConfig = {
 
       });
     })
-    
+    document.getElementById("lightBox-loader").style.display = "none";
 });
 
 /*Drivers Read Method*/
