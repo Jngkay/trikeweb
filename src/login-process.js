@@ -22,6 +22,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
             // Handle login error
             var errorMessage = error.message;
             console.error("Login error:", errorMessage);
+            document.getElementById("lightBox-loader").style.display = "none";
             alert(errorMessage);
             });
 });
