@@ -97,7 +97,7 @@ $(document).ready(function(){
     snapshot.forEach(function(childSnapshot) {
       const driverData = childSnapshot.val();
       console.log("Data");
-      console.log(driverData);
+      console.log(driverData.fullname);
       const row = $("<tr>");
       row.append($("<td>").html(`<img src="${driverData.profilePictureURL}" class="profile-picture" alt="Profile Picture">`));
       row.append($("<td>").text(driverData.fullname));
