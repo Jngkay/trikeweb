@@ -151,14 +151,17 @@
 <script src="../jquery/create-modal.js"></script>
 <script src="../src/firebase.js"></script>
 <script type="text/javascript" src="https://jeromeetienne.github.io/jquery-qrcode/src/jquery.qrcode.js"></script>
-    <script type="text/javascript" src="https://jeromeetienne.github.io/jquery-qrcode/src/qrcode.js"></script>
+<script type="text/javascript" src="https://jeromeetienne.github.io/jquery-qrcode/src/qrcode.js"></script>
+
+
 <script>
-	$('#qrcode').qrcode({
-		render	: "table",
-		text	: "http://jetienne.com"
-	});	
+    $('#qrcode').qrcode({
+        render	: "table",
+        text	: $("").text()
+    });	
 
 </script>
+
 
 </body>
 </html>
