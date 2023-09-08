@@ -40,14 +40,14 @@ const firebaseConfig = {
 
     const storage = firebase.storage();
     const storageRef = storage.ref();
-    const profilePictureRef = storageRef.child("profilePictures/" + qrc);
+    const profilePictureRef = storageRef.child("profilePictures/" + plateNo);
 
     profilePictureRef.put(profilePictureFile).then(snapshot =>{
       snapshot.ref.getDownloadURL().then(downloadURL =>{
 
       firebase
         .database()
-        .ref("drivers/" + $("#qrc").val())
+        .ref("drivers/" + $("#plateNo").val())
         .set({
           fullname: fullname,
           email: email,
@@ -121,7 +121,7 @@ $(document).ready(function(){
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit"));
       actionCell.append($("<button>").text("Delete").click(function() {
-        deleteDriver(driverData.qrc);
+        deleteDriver(driverData.plateNo);
       }));
 
       row.append(actionCell);
