@@ -36,7 +36,7 @@
     margin: 10px 0;
     padding: 20px;
     border: 1px solid #888;
-    width: 350px;
+    width: 600px;
     box-shadow: 5px 10px;
 }
 
@@ -89,4 +89,53 @@
 .create-modal .create-modal-content form .buttons #submit-btn:hover{
     color: white;
     background-color: green;
+}
+
+.two-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.column {
+    flex-basis: calc(50% - 10px);
+    /* Adjust the flex-basis value as needed */
+    padding: 0 5px;
+}
+
+/* Style the "Available" checkbox */
+.create-modal-content input[type="checkbox"]#available {
+    margin-top: 10px; /* Adjust as needed */
+    margin-right: 5px; /* Adjust as needed */
+    vertical-align: middle;
+}
+
+.create-modal-content label[for="available"] {
+    vertical-align: middle;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Style the "Available" checkbox appearance */
+.create-modal-content input[type="checkbox"]#available {
+    /* Hide the default checkbox appearance */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.create-modal-content input[type="checkbox"]#available:checked {
+    background-color: green;
+    border: 1px solid black;
+}
+
+/* Style the "Available" checkbox label */
+.create-modal-content label[for="available"] {
+    font-size: 16px;
+    cursor: pointer;
 }
