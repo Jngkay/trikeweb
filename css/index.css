@@ -56,3 +56,14 @@ body {
     text-decoration: underline;
     color: red;
 }
+
+
+#lightBox-loader{
+    background: #00000075;
+    height: 100%;
+    width: 100%;
+}
+#lightBox-loader{
+    margin: 0 auto;
+    padding-top: 45%;
+}
