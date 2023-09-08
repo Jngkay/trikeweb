@@ -78,7 +78,7 @@ const firebaseConfig = {
         document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
 
-        ocument.getElementById("cancel-btn").click();
+        document.getElementById("cancel-btn").click();
       });
     })
     
