@@ -4,7 +4,7 @@ $(document).ready(function() {
     var qrmodal = $("#qrModalView");
 
     var openModalBtn = $("#addDriverBtn");
-    var viewQR = $("#viewQR");
+    var viewQR = $(".viewQR");
 
     var closeModalBtn = $("#closeModalBtn");
     var cancelBtn = $("#cancel-btn");
