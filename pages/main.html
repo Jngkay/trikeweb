@@ -64,7 +64,7 @@
             </div>
             
             <!--START: Create Modal Section-->
-            <div class="modal-wrapper">
+            <div id="AddDriverModal" class="modal-wrapper">
                 <div id="create-modal" class="create-modal">
                     <div class="create-modal-content">
                         <span class="create-modal-close" id="closeModalBtn">&times;</span>
@@ -100,6 +100,18 @@
                                 <button type="cancel" id="cancel-btn">Cancel</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="qrModalView" class="modal-wrapper">
+                <div id="create-modal" class="create-modal">
+                    <div class="create-modal-content">
+                        <span class="create-modal-close" id="closeModalBtn">&times;</span>
+                        <h2>View Modal</h2>
+                        <hr>
+                        <div id="qrcode"></div>
                     </div>
                 </div>
             </div>
@@ -156,7 +168,7 @@
 <script>
     $('#qrcode').qrcode({
         render	: "table",
-        text	: $("").text()
+        text	: "sample"
     });	
 
 </script>
