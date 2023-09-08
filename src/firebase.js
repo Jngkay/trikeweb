@@ -10,6 +10,7 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
   
+
   /*Create Method */
   $("#submit-btn").click(function(e){
     e.preventDefault();
@@ -19,7 +20,6 @@ const firebaseConfig = {
     const email = $("#email").val();
     const conNum = $("#conNum").val();
     const address = $("#address").val();
-    const pword = $("#pword").val();
     const fn = $("#fn").val();
     const plateNo = $("#plateNo").val();
     const mt = $("#mt").val();
@@ -57,6 +57,7 @@ const firebaseConfig = {
           fn: fn,
           plateNo: plateNo,
           mt: mt,
+          qrc: qrc,
           available: available,
           profilePictureURL: downloadURL
         });
@@ -69,10 +70,10 @@ const firebaseConfig = {
         document.getElementById("email").value = "";
         document.getElementById("conNum").value = "";
         document.getElementById("address").value = "";
-        document.getElementById("pword").value = "";
         document.getElementById("fn").value = "";
         document.getElementById("plateNo").value = "";
         document.getElementById("mt").value = "";
+        document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
 
         document.getElementById("cancel-btn").click();
@@ -105,7 +106,6 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.email));
       row.append($("<td>").text(driverData.conNum));
       row.append($("<td>").text(driverData.address));
-      row.append($("<td>").text(driverData.pword));
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.plateNo));
       row.append($("<td>").text(driverData.mt));
