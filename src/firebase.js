@@ -58,7 +58,6 @@ const firebaseConfig = {
           fn: fn,
           plateNo: plateNo,
           mt: mt,
-          qrc: qrc,
           available: available,
           profilePictureURL: downloadURL
         });
@@ -75,7 +74,6 @@ const firebaseConfig = {
         document.getElementById("fn").value = "";
         document.getElementById("plateNo").value = "";
         document.getElementById("mt").value = "";
-        document.getElementById("qrc").value = "";
         document.getElementById("available").value = "";
 
         document.getElementById("cancel-btn").click();
