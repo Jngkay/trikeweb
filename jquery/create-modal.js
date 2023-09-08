@@ -15,7 +15,7 @@ $(document).ready(function() {
     });
 
     viewQR.click(function() {
-      openModalBtn.show();
+      qrmodal.show();
     });
   
     // Close the modal
