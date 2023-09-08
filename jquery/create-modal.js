@@ -20,20 +20,24 @@ $(document).ready(function() {
     closeModalBtn.click(function() {
       modal.hide();
       qrmodal.hide();
+      $('#qrcode').html("");
     });
 
     cancelBtn.click(function(){
       modal.hide();
       qrmodal.hide();
+      $('#qrcode').html("");
     });
   
     // Close the modal if the user clicks outside of it
     $(window).click(function(event) {
       if (event.target === qrmodal[0]) {
         qrmodal.hide();
+        $('#qrcode').html("");
       }
       if (event.target === qrmodal[0]) {
         qrmodal.hide();
+        $('#qrcode').html("");
       }
     });
   });
