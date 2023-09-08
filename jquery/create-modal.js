@@ -14,7 +14,7 @@ $(document).ready(function() {
       modal.show();
     });
 
-    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); });
+    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); $('#qrcode').html("");});
   
     // Close the modal
     closeModalBtn.click(function() {
