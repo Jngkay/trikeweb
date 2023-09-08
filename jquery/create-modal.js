@@ -16,8 +16,8 @@ $(document).ready(function() {
       modal.show();
     });
 
-    $(document).on('click', '.viewQR', function() { qrmodal.show(); });
-    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); $("#qrModalView").data( "info", getDataModal );});
+    $(document).on('click', '.viewQR', function() { qrmodal.show(); $("#qrModalView").data( "info", getDataModal );});
+    $(document).on('click', '#viewQRClose', function() { qrmodal.hide(); });
   
     // Close the modal
     closeModalBtn.click(function() {
