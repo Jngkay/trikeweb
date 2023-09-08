@@ -112,7 +112,10 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.plateNo));
       row.append($("<td>").text(driverData.mt));
-      row.append($("<td>").append($("<button>")).text("View QR Code"));
+
+      const qrCell = $("<td>");
+      qrCell.append($("<button>").text("View QR Code"));
+
       row.append($("<td>").text(driverData.available));
 
       const actionCell = $("<td>");
