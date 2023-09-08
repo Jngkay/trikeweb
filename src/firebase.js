@@ -116,7 +116,7 @@ $(document).ready(function(){
       const qrCell = $("<td>");
       qrCell.append($("<button class='viewQR'>").text("View QR Code").click(function(){
         $("#qrModalView").show();
-        $("#qrModalView").data("info", "sti");
+        $("#qrModalView").attr("data-info", "sti");
       }));
       row.append(qrCell);
 
