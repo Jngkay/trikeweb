@@ -155,10 +155,13 @@ $(document).ready(function(){
   });
 });
 
-    
 
 
 /*Update Method */
+
+
+
+
 /*Delete Method */
 function deleteDriver(driverId) {
   const databaseRef = firebase.database().ref("drivers/");
