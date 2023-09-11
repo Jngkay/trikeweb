@@ -131,36 +131,26 @@ $(document).ready(function(){
 });
 
 /*Users Read Method */
-$(document).ready(function() {
-  var userTable = $(".userTable");
-  // Reference to your users data in the database
-  var usersRef = firebase.database().ref("users/");
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("users/");
+  const userTableBody = $(".userTableBody"); 
 
-  function clearUserData() {
-    userTable.find("tr:gt(0)").remove();
+  function userclearDataRows() {
+    userTableBody.find("tr:gt(0)").remove();
   }
 
-  // Retrieve user data and populate the table
-  usersRef.on("value", function(snapshot) {
-    //console.log(snapshot.val());
-    clearUserData(); // Clear existing rows
+  databaseRef.orderByChild("firstname").on("value", function(snapshot) {
+    userclearDataRows(); 
 
     snapshot.forEach(function(childSnapshot) {
-      var userData = childSnapshot.val();
-      //console.log(userData);
+      const userData = childSnapshot.val();
+      const newrow = $("<tr>");
+      newrow.append($("<td>").text(userData.firstname));
+      newrow.append($("<td>").text(userData.lastname));
+      newrow.append($("<td>").text(userData.email));
+      newrow.append($("<td>").text(userData.phone));
 
-      var firstname = userData.firstname;
-      var lastname = userData.lastname;
-      var email = userData.email;
-      var phone = userData.phone;
-
-      var newRow = $("<tr>");
-      newRow.append($("<td>").text(firstname));
-      newRow.append($("<td>").text(lastname));
-      newRow.append($("<td>").text(email));
-      newRow.append($("<td>").text(phone));
-
-      userTable.append(newRow);
+      userTableBody.append(newrow);
     });
   });
 });
