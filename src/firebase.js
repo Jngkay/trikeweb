@@ -164,15 +164,17 @@ $(document).ready(function(){
 
 /*Delete Method */
 function deleteDriver(driverId) {
-  const databaseRef = firebase.database().ref("drivers/");
-  const driverRef = databaseRef.child(driverId);
+  if (confirm("Are you sure you want to delete this driver?")) {
+    const databaseRef = firebase.database().ref("drivers/");
+    const driverRef = databaseRef.child(driverId);
 
-  driverRef.remove()
-    .then(function() {
-      alert("Driver deleted successfully.");
-    })
-    .catch(function(error) {
-      console.error("Error deleting driver: ", error);
-      alert("An error occurred while deleting the driver.");
-    });
+    driverRef.remove()
+      .then(function() {
+        alert("Driver Data deleted successfully.");
+      })
+      .catch(function(error) {
+        console.error("Error: ", error);
+        alert("An error occurred while deleting the driver.");
+      });
+  }
 }
