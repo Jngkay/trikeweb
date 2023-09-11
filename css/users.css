@@ -7,7 +7,7 @@
     margin: 20px 10px;
 }
 
-.header {
+#users .body-content .header {
     background-color: whitesmoke;
     border-radius: 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
