@@ -36,7 +36,7 @@
     border: 1px solid #ccc;
 }
 
-.userTableBody th, .tableBody td {
+.userTableBody th, .userTableBody td {
     padding: 3px;
     border: 1px solid black;
     font-size: 12px;
