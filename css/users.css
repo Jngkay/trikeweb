@@ -1,81 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-}
-
-.wrapper {
-    width: 85%;
-    padding: 20px;
-    margin: 0 auto;
-}
-.header {
-    background-color: whitesmoke;
-    border-radius: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.searchInput {
-    border: none;
-    padding: 8px 8px 8px 40px;
-    width: 250px;
-    border-radius: 20px;
-    background-image: url('../assets/search.png'); /* Replace with your search icon path */
-    background-position: 10px center;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    border: solid 1px black;
-}
-
 .userTable-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 10px;
-    margin: 10px 10px;
-    
+    margin: 20px 10px;
 }
 
-.userTable {
+.userTableBody {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 1px solid #ccc;
 }
 
-.userTable th, .userTable td {
-    padding: 10px;
+.userTableBody th, .tableBody td {
+    padding: 3px;
     border: 1px solid black;
+    font-size: 12px;
 }
 
-.userTable th {
-    background-color: whitesmoke;
+.userTableBody th {
+    background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.backbtn{
-    border-radius: 50px;
-    font-size: 25px;
-    padding: 5px 12px;
-    margin-top: 5px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-.backbtn:hover{
-    background-color: black;
-    color: white;
-}
-
-.backnav a{
-    text-decoration: none;
-}
