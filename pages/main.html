@@ -22,7 +22,7 @@
             <h2>Admin</h2>
             <ul>
                 <li><a href="#" class="reveal-content" data-target="dashboard"><img src="../assets/dashboard.png" alt="icon">Dashboard</a></li>
-                <li><a href="users.html"><img src="../assets/users.png" alt="icon">USER</a></li>
+                <li><a href="#" class="reveal-content" data-target="users"><img src="../assets/users.png" alt="icon">USER</a></li>
                 <li><a href="#" class="reveal-content" data-target="drivers"><img src="../assets/driver.png" alt="icon">DRIVERS</a></li>
                 <li><a href="reports.html"><img src="../assets/report.png" alt="icon">REPORTS</a></li>
                 <li id="logout"><a href="../index.html"><img src="../assets/logout.png" alt="icon">Logout</a></li>
@@ -34,6 +34,30 @@
             <div id="dashboard" class="page active">
                 <h1>Dashboard</h1>
                 <p>Welcome to Tricycle Booking Website!</p>
+            </div>
+
+            <!--Users content-->
+            <div id="users" class="page">
+                <h1>Users</h1>
+                <p>Users information goes here.</p>
+                <div class="body-content">
+                    <div class="header">
+                        <h2>REGISTERED USER</h2>
+                        <div class="searchbar">
+                            <input type="text" class="searchInput" placeholder="search" id="searchInput" >
+                        </div>
+                    </div>
+                    <div class="userTable-wrapper">
+                        <table class="userTableBody">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- Content revealed when "Drivers" link is clicked -->
