@@ -158,7 +158,9 @@ $(document).ready(function(){
 
 
 /*Update Method */
-
+$(document).ready(function(){
+  
+})
 
 
 
