@@ -7,7 +7,7 @@
     margin: 20px 10px;
 }
 
-#reports .body-content .header {
+.reportsheader {
     background-color: whitesmoke;
     border-radius: 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@
     text-align: center;
     margin: 15px;
 }
-#reports .body-content .header .searchBar .searchInput {
+.reports-searchBar .searchInput {
     border: none;
     padding: 8px 8px 8px 40px;
     width: 250px;
@@ -30,19 +30,19 @@
     border: solid 1px black;
 }
 
-.reportTableBody {
+#reports .reportTableBody {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
 }
 
-.reportTableBody th, .reportTableBody td {
+#reports .reportTableBody th, #reports .reportTableBody td {
     padding: 3px;
     border: 1px solid black;
     font-size: 12px;
 }
 
-.reportTableBody th {
+#reports .reportTableBody th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
