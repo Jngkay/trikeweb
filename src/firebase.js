@@ -185,6 +185,7 @@ function deleteDriver(driverId) {
 // Fetch the count of users
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("users/");
+  
   databaseRef.once('value', (snapshot) => {
     const usersCount = snapshot.numChildren();
     // Update the HTML element with the usersCount value
