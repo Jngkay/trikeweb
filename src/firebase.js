@@ -180,3 +180,20 @@ function deleteDriver(driverId) {
       });
   }
 }
+
+
+// Fetch the count of users
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("users/");
+  databaseRef.once('value', (snapshot) => {
+    const usersCount = snapshot.numChildren();
+    // Update the HTML element with the usersCount value
+    document.getElementById('usersCount').textContent = usersCount;
+  });
+})
+
+
+// Fetch the count of drivers
+
+
+// Fetch the count of active bookings
