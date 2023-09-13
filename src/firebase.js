@@ -185,16 +185,37 @@ function deleteDriver(driverId) {
 // Fetch the count of users
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("users/");
-  
+
   databaseRef.once('value', (snapshot) => {
     const usersCount = snapshot.numChildren();
-    // Update the HTML element with the usersCount value
-    document.getElementById('usersCount').textContent = usersCount;
+    
+    document.getElementsByClassName('usersCount').textContent = usersCount;
+    console.log("Users Count: " + usersCount);
   });
 })
 
 
 // Fetch the count of drivers
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("drivers/");
+
+  databaseRef.once('value', (snapshot) => {
+    const driversCount = snapshot.numChildren();
+
+    document.getElementsByClassName('driversCount').textContent = driversCount;
+    console.log("Drivers Count: " + driversCount);
+  });
+})
 
 
 // Fetch the count of active bookings
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("active_bookings/");
+
+  databaseRef.once('value', (snapshot) => {
+    const bookingsCount = snapshot.numChildren();
+  
+    document.getElementsByClassName('bookingsCount').textContent = bookingsCount;
+    console.log("Bookings Count: " + bookingsCount);
+  });
+})
