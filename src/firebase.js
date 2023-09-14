@@ -189,7 +189,8 @@ $(document).ready(function(){
   databaseRef.once('value', (snapshot) => {
     const usersCount = snapshot.numChildren();
     
-    document.getElementsByClassName('usersCount').textContent = usersCount;
+    let text = document.getElementsByClassName('usersCount').textContent 
+    document.getElementsByClassName('usersCount').innerHtml = text;
     console.log("Users Count: " + usersCount);
   });
 })

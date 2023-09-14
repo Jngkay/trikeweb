@@ -17,31 +17,45 @@
 }
 #dashboard .body-content .card{
     background-color: #004AAE;
-    margin-bottom: 30px;
-    width: 350px;
+    margin: 25px 0;
+    width: 400px;
     height: auto;
     padding: 20px;
     color: white;
     border-radius: 15px;
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 3px;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
+    box-shadow: 5px 5px 15px gray;
 }
 
 
 #dashboard .body-content .map-section{
     align-items: center;
     text-align: center;
+    justify-content: center;
     display: flex;
 }
 #dashboard .body-content .map-wrapper{
     background-color: #fbcd22;
-    margin-bottom: 30px;
-    width: 350px;
+    width: 400px;
     height: auto;
     padding: 20px;
     border-radius: 15px;
     font-size: 18px;
     letter-spacing: 3px;
+    box-shadow: 5px 5px 15px gray;
 }
+
+#dashboard .body-content .card .icon-title{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#dashboard .body-content .card .icon-title .fa-solid{
+    margin-right: 20px;
+}
+
