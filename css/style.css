@@ -17,7 +17,7 @@
     height: 100%;
     background-color: lightgray; /* Adjust the background color */
     color: black; /* Adjust the text color */
-    padding: 10px 15px 10px 10px;
+    padding: 10px;
     text-align: center;
     position: relative;
     top: 0;
@@ -28,7 +28,7 @@
 .logo-tric img {
     width: 100px;
     height: auto;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 10px; /* Add some spacing between the logo and text */
 }
 
