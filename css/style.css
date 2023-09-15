@@ -28,6 +28,7 @@
 .logo-tric img {
     width: 100px;
     height: auto;
+    margin-top: 10px;
     margin-bottom: 10px; /* Add some spacing between the logo and text */
 }
 
