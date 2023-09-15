@@ -12,7 +12,7 @@
 }
 
 .sidebar {
-    flex: 0 0 170px;
+    flex: 0 0 180px;
     z-index: 1;
     height: 100%;
     background-color: lightgray; /* Adjust the background color */
