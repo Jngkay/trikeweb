@@ -47,7 +47,7 @@ ul {
 }
 
 li {
-    margin-bottom: 15px; /* Add spacing between list items */
+    margin-bottom: 20px; /* Add spacing between list items */
 }
 li a:hover{
     border-bottom: solid 1px white;
