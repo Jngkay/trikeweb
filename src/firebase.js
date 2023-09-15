@@ -102,17 +102,17 @@ $(document).ready(function(){
       const row = $("<tr>");
       row.append($("<td>").html(`<img src="${driverData.profilePictureURL}" class="profile-picture" alt="Profile Picture">`));
       row.append($("<td>").text(driverData.fullname));
-      row.append($("<td>").text(driverData.email));
+      //row.append($("<td>").text(driverData.email));
       row.append($("<td>").text(driverData.conNum));
-      row.append($("<td>").text(driverData.address));
-      row.append($("<td>").text(driverData.fn));
+      //row.append($("<td>").text(driverData.address));
+      //row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.plateNo));
-      row.append($("<td>").text(driverData.mt));
+      //row.append($("<td>").text(driverData.mt));
 
       const qrCell = $("<td>");
       qrCell.append($("<button class='viewQR'>").text("View QR Code").click(function(){
         $("#qrModalView").show();
-        $('#qrcode').qrcode({text	: driverData.fullname});	
+        $('#qrcode').qrcode({text	: "http://dhrrp2trikeapp.com/profile/profile.html?plateno="+ driverData.plateNo});	
       }));
       row.append(qrCell);
 
@@ -156,6 +156,13 @@ $(document).ready(function(){
 });
 
 
+/*Search Users in database */
+
+
+
+
+
+
 
 /*Update Method */
 $(document).ready(function(){
@@ -182,31 +189,31 @@ function deleteDriver(driverId) {
 }
 
 
+
+
 // Fetch the count of users
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("users/");
 
   databaseRef.once('value', (snapshot) => {
     const usersCount = snapshot.numChildren();
-    
-    let text = document.getElementsByClassName('usersCount').textContent 
-    document.getElementsByClassName('usersCount').innerHtml = text;
+    $(".usersCount").html(usersCount);
     console.log("Users Count: " + usersCount);
   });
 })
 
 
 // Fetch the count of drivers
+
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
-
-  databaseRef.once('value', (snapshot) => {
-    const driversCount = snapshot.numChildren();
-
-    document.getElementsByClassName('driversCount').textContent = driversCount;
-    console.log("Drivers Count: " + driversCount);
+ 
+  databaseRef.orderByChild("available").equalTo(true).on("value", function(snapshot) {
+    const availableDrivers = snapshot.numChildren();
+    $(".driversCount").html(availableDrivers);
+    console.log("Drivers Count: " + availableDrivers);
   });
-})
+});
 
 
 // Fetch the count of active bookings
@@ -216,7 +223,7 @@ $(document).ready(function(){
   databaseRef.once('value', (snapshot) => {
     const bookingsCount = snapshot.numChildren();
   
-    document.getElementsByClassName('bookingsCount').textContent = bookingsCount;
+    $(".bookingsCount").html(bookingsCount);
     console.log("Bookings Count: " + bookingsCount);
   });
 })

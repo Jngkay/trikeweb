@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="../css/users.css">
     <link rel="stylesheet" href="../css/reports.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/qrcode.css">
     <link rel="icon" type="image/x-icon" href="/assets/logoTricyApp.png">
 
-    <title>Dashboard | DHRRP2 Web App</title>
+    <title>Dashboard | DHRRP2</title>
 </head>
 <body>
     <div id="lightBox-loader">
@@ -25,7 +26,7 @@
             <h2>Admin</h2>
             <ul>
                 <li><a href="#" class="reveal-content" data-target="dashboard"><img src="../assets/dashboard.png" alt="icon">Dashboard</a></li>
-                <li><a href="#" class="reveal-content" data-target="users"><img src="../assets/users.png" alt="icon">USER</a></li>
+                <li><a href="#" class="reveal-content" data-target="users"><img src="../assets/users.png" alt="icon">USERS</a></li>
                 <li><a href="#" class="reveal-content" data-target="drivers"><img src="../assets/driver.png" alt="icon">DRIVERS</a></li>
                 <li><a href="#" class="reveal-content" data-target="reports"><img src="../assets/report.png" alt="icon">REPORTS</a></li>
                 <li id="logout"><a href="../index.html"><img src="../assets/logout.png" alt="icon">Logout</a></li>
@@ -42,14 +43,14 @@
                         <div class="card">
                             <div class="icon-title">
                                 <i class="fa-solid fa-users"></i>
-                                <p class="card-title">USERS</p>
+                                <p class="card-title">ACTIVE USERS</p>
                             </div>
                             <p class="usersCount">0</p>
                         </div>
                         <div class="card">
                             <div class="icon-title">
                                 <i class="fa-solid fa-id-card"></i>
-                                <p class="card-title">DRIVERS</p>
+                                <p class="card-title">AVAILABLE DRIVERS</p>
                             </div>
                             <p class="driversCount">0</p>
                         </div>
@@ -63,7 +64,7 @@
                     </div>
                     <div class="map-section">
                         <div class="map-wrapper">
-                            <p class="card-title">MAPPING</p>
+                            <p class="card-title"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.762635037311!2d122.51853887447271!3d10.752768259630797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aefb4117e34267%3A0x7165a77ab6e98533!2sDECA%20HOMES%20PAVIA%20RESORT%20AND%20RESIDENCES!5e0!3m2!1sen!2sph!4v1694675054430!5m2!1sen!2sph" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
                         </div>
                     </div>
                 </div>
@@ -73,8 +74,8 @@
             <div id="users" class="page">
                 <div class="body-content">
                     <div class="header">
-                        <h2>REGISTERED USER</h2>
-                        <input type="text" class="searchInput" placeholder="search" id="searchInput" >
+                        <h2>REGISTERED USERS</h2>
+                        <input type="text" class="searchInput" placeholder="search" id="searchUserInput" >
                     </div>
                     <div class="userTable-wrapper">
                         <table class="userTableBody">
@@ -93,7 +94,7 @@
             <div id="reports" class="page">
                 <div class="body-content">
                     <div class="header">
-                        <h2>REGISTERED USER</h2>
+                        <h2>REPORTS</h2>
                         <div class="reports-searchbar">
                             <input type="text" class="searchInput" placeholder="search" id="searchInput" >
                         </div>
@@ -122,12 +123,12 @@
                             <tr>
                                 <th>Profile</th>
                                 <th>Fullname</th>
-                                <th>Email</th>
-                                <th>Contact #</th>
-                                <th>Address</th>
-                                <th>Franchise #</th>
-                                <th>Plate #</th>
-                                <th>Motor Type</th>
+                                <!--th>Email</th-->
+                                <th>Contact No.</th>
+                                <!--th>Address</th-->
+                                <!--th>Franchise #</th-->
+                                <th>Plate No.</th>
+                                <!--th>Motor Type</th-->
                                 <th>QRcode</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -179,6 +180,10 @@
                         <h2>Driver Details and QR Code</h2>
                         <hr>
                         <div id="qrcode"></div>
+                        <hr>
+                        <div class="dl-btn">
+                            <button type="button" id="dl-btn">Download QR Code</button>
+                        </div>
                     </div>
                 </div>
             </div>

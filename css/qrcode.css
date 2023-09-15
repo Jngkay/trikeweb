@@ -1,0 +1,12 @@
+#dl-btn{
+    font-size: 18px;
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+    background-color: black;
+    border-radius: 10px;
+}
+#dl-btn:hover{
+    color: black;
+    background-color: #fbcd22;
+}

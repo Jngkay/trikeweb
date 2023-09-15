@@ -4,7 +4,7 @@
     justify-content: space-between;
     /*background-color: gray;*/
     display: flex;
-    padding: 5% 10%;
+    padding: 5px 5%;
     margin-top: 50px;
 }
 
@@ -39,9 +39,9 @@
 }
 #dashboard .body-content .map-wrapper{
     background-color: #fbcd22;
-    width: 400px;
-    height: auto;
-    padding: 20px;
+    width: 450px;
+    height: 450;
+    padding: 10px;
     border-radius: 15px;
     font-size: 18px;
     letter-spacing: 3px;
