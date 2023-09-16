@@ -44,10 +44,11 @@ body {
     margin-bottom: 20px;
 }
 
-.plateNo {
+.plateNo-box {
     font-size: 24px;
     font-weight: 600;
     color: #000;
+    background-color: antiquewhite;
 }
 
 .right-container {
@@ -60,6 +61,7 @@ body {
 .info1,
 .info2 {
     margin-bottom: 20px;
+    background-color: bisque;
 }
 
 p {
