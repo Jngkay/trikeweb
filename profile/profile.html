@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="profile.css">
+
     <title>Profile | DHRRP2</title>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <div class="left-container">
+            <div class="profile-picture">
+                
+            </div>
+            <div class="plateNo"></div>
+        </div>
+
+        <div class="right-container">
+            <div class="info1">
+                <p class="fullname"></p>
+                <p class="address"></p>
+                <p class="contact"></p>
+            </div>
+            <div class="info2">
+                <p class="email"></p>
+                <p class="franchiseNo"></p>
+                <p class="motorType"></p>
+            </div>
+        </div>
+    </div>
+
+    <!--script src="profileFirebase.js"></script-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyC-JvB2RXrsup4P9oH8IgCwUm1W5Ce08dQ",
+        authDomain: "tricyclebooking-ebe95.firebaseapp.com",
+        databaseURL: "https://tricyclebooking-ebe95-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "tricyclebooking-ebe95",
+        storageBucket: "tricyclebooking-ebe95.appspot.com",
+        messagingSenderId: "211757260511",
+        appId: "1:211757260511:web:08ab4ab453e1eb6c81d36a"
+        };  
+
+        firebase.initializeApp(firebaseConfig);
+
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plateNo = urlParams.get("plateno");
+            
+            if (plateNo) {
+                // Fetch the driver's data from Firebase based on the plateNo
+                fetchDriverData(plateNo);
+            } else {
+                // Handle the case where the plateNo parameter is missing
+                console.error("Plate number parameter missing.");
+            }
+        });
+
+        function fetchDriverData(plateNo) {
+            // Use Firebase to fetch the driver's data based on the plateNo
+            const databaseRef = firebase.database().ref("drivers/" + plateNo);
+            databaseRef.on("value", function(snapshot) {
+                const driverData = snapshot.val();
+                
+                if (driverData) {
+                    // Update your HTML elements with driverData using jQuery
+                    $(".profile-picture").html(`<img src="${driverData.profilePictureURL}" alt="Profile Picture">`);
+                    $(".plateNo").text(driverData.plateNo);
+                    $(".fullname").text(driverData.fullname);
+                    $(".address").text(driverData.address);
+                    $(".contact").text(driverData.conNum);
+                    $(".email").text(driverData.email);
+                    $(".franchiseNo").text(driverData.fn);
+                    $(".motorType").text(driverData.mt);
+                } else {
+                    // Handle the case where no data is found for the plateNo
+                    console.error("Driver not found");
+                }
+            });
+        }
+    </script>
 </body>
 </html>
