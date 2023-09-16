@@ -1,4 +1,4 @@
-const firebaseConfig = {
+/*const firebaseConfig = {
     apiKey: "AIzaSyC-JvB2RXrsup4P9oH8IgCwUm1W5Ce08dQ",
     authDomain: "tricyclebooking-ebe95.firebaseapp.com",
     databaseURL: "https://tricyclebooking-ebe95-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -41,5 +41,5 @@ $(document).ready(function() {
     displayData(plateNoToDisplay);
   });
 
-  
+  */
   
