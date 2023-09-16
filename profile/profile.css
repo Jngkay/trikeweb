@@ -51,6 +51,8 @@ body {
 
 .right-container {
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .info1,
