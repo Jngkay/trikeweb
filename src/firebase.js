@@ -119,16 +119,16 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.available));
 
       const actionCell = $("<td>");
-      actionCell.append($("<button>").text("Edit").addClass("edit-btn"));
-      actionCell.append($("<button>").text("Delete"))
+      actionCell.append($("<button>").text("Edit"));
+      actionCell.append($("<button>").text("Delete").click(function() {
         deleteDriver(driverData.plateNo);
-      });
+      }));
 
       row.append(actionCell);
       tableBody.append(row);
     });
   });
-
+});
 
 /*Users Read Method */
 $(document).ready(function(){
