@@ -180,7 +180,22 @@ $(".tableBody").on("click", ".edit-driver-button", function() {
     // Populate the modal fields with the driver's data
     $("#fullname").val(driverData.fullname);
     $("#email").val(driverData.email);
-    // ... Populate other fields
+    $("#conNum").val(driverData.conNum);
+    $("#address").val(driverData.address);
+    $("#pword").val(driverData.pword);
+    $("#fn").val(driverData.fn);
+    $("#plateNo").val(driverData.plateNo);
+    $("#mt").val(driverData.mt);
+    $("#available").prop("checked", driverData.available); // Set "available" status
+    
+    // Display the profile picture in the modal
+    if (driverData.profilePictureURL) {
+      // If a profile picture URL is available, display the image
+      $("#profilePicturePreview").attr("src", driverData.profilePictureURL);
+    } else {
+      // If no profile picture URL is available, display a default image or placeholder
+      $("#profilePicturePreview").attr("src", "path_to_default_image.jpg");
+    }
     
     // Show the modal in "Edit" mode
     $("#submit-btn").text("Update"); // Change button text to "Update"
@@ -206,7 +221,25 @@ $("#submit-btn").click(function(e) {
     // Update the fields that can be edited
     currentDriverData.fullname = $("#fullname").val();
     currentDriverData.email = $("#email").val();
-    // ... Update other fields
+    currentDriverData.conNum = $("#conNum").val();
+    currentDriverData.address = $("#address").val();
+    currentDriverData.pword = $("#pword").val();
+    currentDriverData.fn = $("#fn").val();
+    currentDriverData.mt = $("#mt").val();
+    currentDriverData.available = $("#available").prop("checked"); // Get "available" status
+    
+    // Update the profile picture if a new one is selected
+    const newProfilePictureFile = $("#profilePicture").prop("files")[0];
+    if (newProfilePictureFile) {
+      // Upload the new profile picture and update the URL
+      const storage = firebase.storage();
+      const storageRef = storage.ref();
+      const profilePictureRef = storageRef.child("profilePictures/" + driverId);
+      
+      profilePictureRef.put(newProfilePictureFile).then((newSnapshot) => {
+        newSnapshot.ref.getDownloadURL().then((newDownloadURL) => {
+          // Update the profile picture URL in the data
+          currentDriverData.profilePictureURL = newDownloadURL;
     
     // Update the data in Firebase
     databaseRef.set(currentDriverData)
