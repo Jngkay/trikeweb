@@ -120,6 +120,7 @@ $(document).ready(function(){
 
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit").addClass("edit-btn"));
+      actionCell.append($("<button>").text("Delete"))
         deleteDriver(driverData.plateNo);
       });
 
