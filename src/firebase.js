@@ -121,13 +121,13 @@ $(document).ready(function(){
       const actionCell = $("<td>");
       actionCell.append($("<button>").text("Edit").addClass("edit-driver-button"));
         deleteDriver(driverData.plateNo);
-      }));
+      });
 
       row.append(actionCell);
       tableBody.append(row);
     });
   });
-});
+
 
 /*Users Read Method */
 $(document).ready(function(){
@@ -240,18 +240,33 @@ $("#submit-btn").click(function(e) {
         newSnapshot.ref.getDownloadURL().then((newDownloadURL) => {
           // Update the profile picture URL in the data
           currentDriverData.profilePictureURL = newDownloadURL;
-    
-    // Update the data in Firebase
-    databaseRef.set(currentDriverData)
-      .then(function() {
-        alert("Driver Data updated successfully.");
-        // Close the modal
-        $("#cancel-btn").click();
-      })
-      .catch(function(error) {
-        console.error("Error: ", error);
-        alert("An error occurred while updating the driver data.");
+          
+          // Update the data in Firebase
+          databaseRef.set(currentDriverData)
+            .then(function() {
+              alert("Driver Data updated successfully.");
+              // Close the modal
+              $("#cancel-btn").click();
+            })
+            .catch(function(error) {
+              console.error("Error: ", error);
+              alert("An error occurred while updating the driver data.");
+            });
+        });
       });
+    } else {
+      // No new profile picture selected, update other fields only
+      databaseRef.set(currentDriverData)
+        .then(function() {
+          alert("Driver Data updated successfully.");
+          // Close the modal
+          $("#cancel-btn").click();
+        })
+        .catch(function(error) {
+          console.error("Error: ", error);
+          alert("An error occurred while updating the driver data.");
+        });
+    }
   });
 });
 
