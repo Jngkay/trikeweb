@@ -119,8 +119,7 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.available));
 
       const actionCell = $("<td>");
-      actionCell.append($("<button>").text("Edit"));
-      actionCell.append($("<button>").text("Delete").click(function() {
+      actionCell.append($("<button>").text("Edit").addClass("edit-driver-button"));
         deleteDriver(driverData.plateNo);
       }));
 
@@ -166,7 +165,7 @@ $(document).ready(function(){
 
 /*Update Method */
 // Add event listener to the "Edit" button
-$(".tableBody").on("click", "button:contains('Edit')", function() {
+$(".tableBody").on("click", ".edit-driver-button", function() {
   // Identify the selected row
   const selectedRow = $(this).closest("tr");
   
