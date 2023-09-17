@@ -119,7 +119,7 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.available));
 
       const actionCell = $("<td>");
-      actionCell.append($("<button>").text("Edit").addClass("edit-driver-button"));
+      actionCell.append($("<button>").text("Edit").addClass("edit-btn"));
         deleteDriver(driverData.plateNo);
       });
 
@@ -164,111 +164,7 @@ $(document).ready(function(){
 
 
 /*Update Method */
-// Add event listener to the "Edit" button
-$(".tableBody").on("click", ".edit-driver-button", function() {
-  // Identify the selected row
-  const selectedRow = $(this).closest("tr");
-  
-  // Get the driver ID (you should have a unique identifier like plateNo)
-  const driverId = selectedRow.find("td:eq(3)").text(); // Change 3 to the appropriate column index
-  
-  // Fetch data for the selected driver from Firebase
-  const databaseRef = firebase.database().ref("drivers/" + driverId);
-  databaseRef.once('value', (snapshot) => {
-    const driverData = snapshot.val();
-    
-    // Populate the modal fields with the driver's data
-    $("#fullname").val(driverData.fullname);
-    $("#email").val(driverData.email);
-    $("#conNum").val(driverData.conNum);
-    $("#address").val(driverData.address);
-    $("#pword").val(driverData.pword);
-    $("#fn").val(driverData.fn);
-    $("#plateNo").val(driverData.plateNo);
-    $("#mt").val(driverData.mt);
-    $("#available").prop("checked", driverData.available); // Set "available" status
-    
-    // Display the profile picture in the modal
-    if (driverData.profilePictureURL) {
-      // If a profile picture URL is available, display the image
-      $("#profilePicturePreview").attr("src", driverData.profilePictureURL);
-    } else {
-      // If no profile picture URL is available, display a default image or placeholder
-      $("#profilePicturePreview").attr("src", "path_to_default_image.jpg");
-    }
-    
-    // Show the modal in "Edit" mode
-    $("#submit-btn").text("Update"); // Change button text to "Update"
-    // Disable or hide fields that should not be edited in "Edit" mode
-    $("#profilePicture").prop("disabled", true); // Disable profile picture input
-    
-    // Show the modal
-    $("#AddDriverModal").show();
-  });
-});
 
-// Update data in Firebase when the modal is submitted in "Edit" mode
-$("#submit-btn").click(function(e) {
-  e.preventDefault();
-  // Get the driver ID (you should have a unique identifier like plateNo)
-  const driverId = $("#plateNo").val(); // Assuming plateNo is the unique identifier
-  
-  // Fetch the current data for the driver from Firebase
-  const databaseRef = firebase.database().ref("drivers/" + driverId);
-  databaseRef.once('value', (snapshot) => {
-    const currentDriverData = snapshot.val();
-    
-    // Update the fields that can be edited
-    currentDriverData.fullname = $("#fullname").val();
-    currentDriverData.email = $("#email").val();
-    currentDriverData.conNum = $("#conNum").val();
-    currentDriverData.address = $("#address").val();
-    currentDriverData.pword = $("#pword").val();
-    currentDriverData.fn = $("#fn").val();
-    currentDriverData.mt = $("#mt").val();
-    currentDriverData.available = $("#available").prop("checked"); // Get "available" status
-    
-    // Update the profile picture if a new one is selected
-    const newProfilePictureFile = $("#profilePicture").prop("files")[0];
-    if (newProfilePictureFile) {
-      // Upload the new profile picture and update the URL
-      const storage = firebase.storage();
-      const storageRef = storage.ref();
-      const profilePictureRef = storageRef.child("profilePictures/" + driverId);
-      
-      profilePictureRef.put(newProfilePictureFile).then((newSnapshot) => {
-        newSnapshot.ref.getDownloadURL().then((newDownloadURL) => {
-          // Update the profile picture URL in the data
-          currentDriverData.profilePictureURL = newDownloadURL;
-          
-          // Update the data in Firebase
-          databaseRef.set(currentDriverData)
-            .then(function() {
-              alert("Driver Data updated successfully.");
-              // Close the modal
-              $("#cancel-btn").click();
-            })
-            .catch(function(error) {
-              console.error("Error: ", error);
-              alert("An error occurred while updating the driver data.");
-            });
-        });
-      });
-    } else {
-      // No new profile picture selected, update other fields only
-      databaseRef.set(currentDriverData)
-        .then(function() {
-          alert("Driver Data updated successfully.");
-          // Close the modal
-          $("#cancel-btn").click();
-        })
-        .catch(function(error) {
-          console.error("Error: ", error);
-          alert("An error occurred while updating the driver data.");
-        });
-    }
-  });
-});
 
 
 
