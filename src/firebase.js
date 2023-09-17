@@ -165,9 +165,64 @@ $(document).ready(function(){
 
 
 /*Update Method */
-$(document).ready(function(){
+// Add event listener to the "Edit" button
+$(".tableBody").on("click", "button:contains('Edit')", function() {
+  // Identify the selected row
+  const selectedRow = $(this).closest("tr");
   
-})
+  // Get the driver ID (you should have a unique identifier like plateNo)
+  const driverId = selectedRow.find("td:eq(3)").text(); // Change 3 to the appropriate column index
+  
+  // Fetch data for the selected driver from Firebase
+  const databaseRef = firebase.database().ref("drivers/" + driverId);
+  databaseRef.once('value', (snapshot) => {
+    const driverData = snapshot.val();
+    
+    // Populate the modal fields with the driver's data
+    $("#fullname").val(driverData.fullname);
+    $("#email").val(driverData.email);
+    // ... Populate other fields
+    
+    // Show the modal in "Edit" mode
+    $("#submit-btn").text("Update"); // Change button text to "Update"
+    // Disable or hide fields that should not be edited in "Edit" mode
+    $("#profilePicture").prop("disabled", true); // Disable profile picture input
+    
+    // Show the modal
+    $("#AddDriverModal").show();
+  });
+});
+
+// Update data in Firebase when the modal is submitted in "Edit" mode
+$("#submit-btn").click(function(e) {
+  e.preventDefault();
+  // Get the driver ID (you should have a unique identifier like plateNo)
+  const driverId = $("#plateNo").val(); // Assuming plateNo is the unique identifier
+  
+  // Fetch the current data for the driver from Firebase
+  const databaseRef = firebase.database().ref("drivers/" + driverId);
+  databaseRef.once('value', (snapshot) => {
+    const currentDriverData = snapshot.val();
+    
+    // Update the fields that can be edited
+    currentDriverData.fullname = $("#fullname").val();
+    currentDriverData.email = $("#email").val();
+    // ... Update other fields
+    
+    // Update the data in Firebase
+    databaseRef.set(currentDriverData)
+      .then(function() {
+        alert("Driver Data updated successfully.");
+        // Close the modal
+        $("#cancel-btn").click();
+      })
+      .catch(function(error) {
+        console.error("Error: ", error);
+        alert("An error occurred while updating the driver data.");
+      });
+  });
+});
+
 
 
 

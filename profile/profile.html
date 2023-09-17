@@ -62,13 +62,11 @@
         });
 
         function fetchDriverData(plateNo) {
-            // Use Firebase to fetch the driver's data based on the plateNo
             const databaseRef = firebase.database().ref("drivers/" + plateNo);
             databaseRef.on("value", function(snapshot) {
                 const driverData = snapshot.val();
                 
                 if (driverData) {
-                    // Update your HTML elements with driverData using jQuery
                     $(".profile-picture").html(`<img src="${driverData.profilePictureURL}" alt="Profile Picture">`);
                     $(".plateNo").text(driverData.plateNo);
                     $(".fullname").text(driverData.fullname);
@@ -78,7 +76,6 @@
                     $(".franchiseNo").text(driverData.fn);
                     $(".motorType").text(driverData.mt);
                 } else {
-                    // Handle the case where no data is found for the plateNo
                     console.error("Driver not found");
                 }
             });
