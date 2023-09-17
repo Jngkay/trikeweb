@@ -61,6 +61,7 @@ body {
 .left-container input{
     border: none;
     background-color: gray;
+    color: white;
     width: 250px;
     font-weight: 800;
     padding: 2px;
@@ -90,8 +91,10 @@ body {
 
 .right-container input{
     border: none;
-    
+    color: #000;
     font-size: 16px;
+    background-color: #000;
+    padding: 3px;
 }
 
 .right-container .info{
@@ -101,6 +104,6 @@ body {
 }
 .right-container .info .data{
     display: inline-block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     margin-right: 10px;
 }
