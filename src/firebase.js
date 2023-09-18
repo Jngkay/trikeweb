@@ -162,10 +162,9 @@ $(document).ready(function(){
 
 /*Update Method */
 $(".tableBody").on("click", ".edit-btn", function() {
-  // Identify the selected row
   const selectedRow = $(this).closest("tr");
   
-  // Get the driver ID (you should have a unique identifier like plateNo)
+  // Get the driver ID 
   const driverId = selectedRow.find("td:eq(3)").text(); // Change 3 to the appropriate column index
   
   // Fetch data for the selected driver from Firebase
@@ -173,7 +172,6 @@ $(".tableBody").on("click", ".edit-btn", function() {
   databaseRef.once('value', (snapshot) => {
     const driverData = snapshot.val();
     
-    // Populate the modal fields with the driver's data
     $("#fullname").val(driverData.fullname);
     $("#email").val(driverData.email);
     $("#conNum").val(driverData.conNum);
@@ -182,7 +180,7 @@ $(".tableBody").on("click", ".edit-btn", function() {
     $("#fn").val(driverData.fn);
     $("#plateNo").val(driverData.plateNo);
     $("#mt").val(driverData.mt);
-    $("#available").prop("checked", driverData.available); // Update the "available" checkbox
+    $("#available").prop("checked", driverData.available); 
 
     // Show the existing profile picture
     const profilePictureUrl = driverData.profilePictureURL;
@@ -193,7 +191,6 @@ $(".tableBody").on("click", ".edit-btn", function() {
     // Enable the profile picture input for updates
     $("#profilePicture").prop("disabled", false);
     
-    // Show the modal
     $("#AddDriverModal").show();
   });
 });
@@ -201,15 +198,14 @@ $(".tableBody").on("click", ".edit-btn", function() {
 // Update data in Firebase when the modal is submitted in "Edit" mode
 $("#submit-btn").click(function(e) {
   e.preventDefault();
-  // Get the driver ID (you should have a unique identifier like plateNo)
-  const driverId = $("#plateNo").val(); // Assuming plateNo is the unique identifier
+  
+  const driverId = $("#plateNo").val(); 
   
   // Fetch the current data for the driver from Firebase
   const databaseRef = firebase.database().ref("drivers/" + driverId);
   databaseRef.once('value', (snapshot) => {
     const currentDriverData = snapshot.val();
     
-    // Update the fields that can be edited
     currentDriverData.fullname = $("#fullname").val();
     currentDriverData.email = $("#email").val();
     currentDriverData.conNum = $("#conNum").val();
@@ -217,7 +213,7 @@ $("#submit-btn").click(function(e) {
     currentDriverData.pword = $("#pword").val();
     currentDriverData.fn = $("#fn").val();
     currentDriverData.mt = $("#mt").val();
-    currentDriverData.available = $("#available").prop("checked"); // Update the "available" status
+    currentDriverData.available = $("#available").prop("checked"); 
 
     // Check if a new profile picture was selected
     const profilePictureInput = document.getElementById("profilePicture");
@@ -231,14 +227,13 @@ $("#submit-btn").click(function(e) {
 
       profilePictureRef.put(newProfilePictureFile).then((snapshot) => {
         snapshot.ref.getDownloadURL().then((downloadURL) => {
-          // Update the profilePictureURL with the new download URL
           currentDriverData.profilePictureURL = downloadURL;
 
           // Update the data in Firebase
           databaseRef.set(currentDriverData)
             .then(function() {
               alert("Driver Data and Profile Picture updated successfully.");
-              // Close the modal
+              
               $("#cancel-btn").click();
             })
             .catch(function(error) {
@@ -252,7 +247,7 @@ $("#submit-btn").click(function(e) {
       databaseRef.set(currentDriverData)
         .then(function() {
           alert("Driver Data updated successfully.");
-          // Close the modal
+         
           $("#cancel-btn").click();
         })
         .catch(function(error) {
