@@ -321,4 +321,37 @@ $(document).ready(function(){
 
 
 
+$(document).ready(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const plateNo = urlParams.get("plateno"); // Change "plateNo" to "plateno" to match the parameter name in your QR code URL
+  
+  if (plateNo) {
+      // Fetch the driver's data from Firebase based on the plateNo
+      fetchDriverData(plateNo);
+  } else {
+      // Handle the case where the plateNo parameter is missing
+      console.error("Plate number parameter missing.");
+  }
+});
+
+function fetchDriverData(plateNo) {
+  const databaseRef = firebase.database().ref("drivers/" + plateNo);
+  databaseRef.on("value", function(snapshot) {
+      const driverData = snapshot.val();
+      
+      if (driverData) {
+          // Populate the HTML elements with the retrieved data
+          $(".profile-picture img").attr("src", driverData.profilePictureURL);
+          $(".plateNo-data").val(driverData.plateNo);
+          $(".fullname-data").val(driverData.fullname);
+          $(".address-data").val(driverData.address);
+          $(".contact-data").val(driverData.conNum);
+          $(".email-data").val(driverData.email);
+          $(".franNo-data").val(driverData.fn);
+          $(".motor-data").val(driverData.mt);
+      } else {
+          console.error("Driver not found");
+      }
+  });
+}
 
