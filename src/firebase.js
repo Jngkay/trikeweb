@@ -157,45 +157,7 @@ $(document).ready(function(){
 
 
 /*Search Users in database */
-$("#searchUserInput").on("input", function () {
-  const searchQuery = $(this).val().toLowerCase();
-  console.log("Search Query:", searchQuery);
 
-  const userTableBody = $(".userTableBody");
-
-  function clearSearchDataRows() {
-    userTableBody.find("tr:gt(0)").remove();
-  }
-
-  const databaseRef = firebase.database().ref("users/");
-
-  // Fetch data from Firebase and filter based on the search query
-  databaseRef.orderByChild("firstname").startAt(searchQuery).endAt(searchQuery + "\uf8ff").on("value", function (snapshot) {
-    console.log("Firebase Query Snapshot:", snapshot);
-    clearSearchDataRows();
-    
-    snapshot.forEach(function (childSnapshot) {
-          const userData = childSnapshot.val();
-          console.log("User Data:", userData);
-
-          const searchnewRow = $("<tr>");
-
-          const firstnameCell = $("<td>").text(userData.firstname);
-          const lastnameCell = $("<td>").text(userData.lastname);
-          const emailCell = $("<td>").text(userData.email);
-          const phoneCell = $("<td>").text(userData.phone);
-
-          // Append table cells to the new row
-          searchnewRow.append(firstnameCell);
-          searchnewRow.append(lastnameCell);
-          searchnewRow.append(emailCell);
-          searchnewRow.append(phoneCell);
-
-          // Append the new row to the table
-          userTableBody.append(searchnewRow);
-      });
-  });
-});
 
 
 
