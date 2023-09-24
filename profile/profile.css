@@ -7,14 +7,18 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.body-content{
+body{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     background-color: lightslategray;
+}
+.body-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
+    margin: 5%;
     padding: 5%;
 }
 
@@ -117,7 +121,7 @@
        
     }
     .header{
-        font-size: 18px;
+        font-size: 16px;
         width: 100%;
 
     }
@@ -140,13 +144,11 @@
     }
 
     .left-container .plateNo-box{
-        font-size: 18px;
         width: 170px;
         margin-bottom: 10px;
     }
-    .left-container input{
-        width: 70px;
-        font-size: 18px;
+    .left-container span{
+        font-size: 16px;
     }
    
 
@@ -155,11 +157,11 @@
     }
     
     .right-container .data p{
-        font-size: 14px;
+        font-size: 12px;
     }
     
     .right-container .data span{
-        font-size: 14px;
+        font-size: 12px;
     }
 
 }
