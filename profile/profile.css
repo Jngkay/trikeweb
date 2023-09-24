@@ -106,3 +106,21 @@ body {
     margin-bottom: 10px;
     margin-right: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column; /* Stack left and right containers vertically */
+        margin: 5%;
+        padding: 20px;
+    }
+
+    .left-container,
+    .right-container {
+        width: 100%; /* Make both containers take full width */
+        margin-right: 0;
+    }
+
+    .right-container {
+        align-items: center; /* Center align the content in the right container */
+    }
+}
