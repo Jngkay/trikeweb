@@ -112,7 +112,7 @@ $(document).ready(function(){
       const qrCell = $("<td>");
       qrCell.append($("<button class='viewQR'>").text("View QR Code").click(function(){
         $("#qrModalView").show();
-        $('#qrcode').qrcode({text: "http://dhrrp2trikeapp.com/profile/profile.html?plateno=" + driverData.plateNo});	
+        $('#qrcode').qrcode("http://dhrrp2trikeapp.com/profile/profile.html?plateno=" + driverData.plateNo);	
       }));
       row.append(qrCell);
 
