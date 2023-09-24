@@ -351,18 +351,4 @@ function fetchDriverData(plateNo) {
 }
 
 // Function to trigger the QR code download
-function downloadQRCode() {
-  const canvas = document.getElementById("qrcode canvas");
-  const a = document.createElement("a");
-  a.href = canvas.toDataURL("image/png"); 
-  a.download = "${driverData.fullname}_qrcode.png"; 
-  a.style.display = "none";
-  document.body.appendChild(a);
-  a.click(); 
-  document.body.removeChild(a); 
-}
 
-$("#downloadQRCode").click(function () {
-  const driverName = $("#fullname-data").text(); 
-  downloadQRCode(driverName);
-});
