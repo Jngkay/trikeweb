@@ -102,12 +102,12 @@ $(document).ready(function(){
       const row = $("<tr>");
       row.append($("<td>").html(`<img src="${driverData.profilePictureURL}" class="profile-picture" alt="Profile Picture">`));
       row.append($("<td>").text(driverData.fullname));
-      //row.append($("<td>").text(driverData.email));
+      row.append($("<td>").text(driverData.email));
       row.append($("<td>").text(driverData.conNum));
-      //row.append($("<td>").text(driverData.address));
-      //row.append($("<td>").text(driverData.fn));
+      row.append($("<td>").text(driverData.address));
+      row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.plateNo));
-      //row.append($("<td>").text(driverData.mt));
+      row.append($("<td>").text(driverData.mt));
 
       const qrCell = $("<td>");
       qrCell.append($("<button class='viewQR'>").text("View QR Code").click(function(){
