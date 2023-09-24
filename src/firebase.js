@@ -259,8 +259,6 @@ $("#submit-btn").click(function(e) {
 
 
 
-
-
 /*Delete Method */
 function deleteDriver(driverId) {
   if (confirm("Are you sure you want to delete this driver?")) {
