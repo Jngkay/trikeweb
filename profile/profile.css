@@ -25,6 +25,8 @@
     padding: 10px;
     border: solid 2px black;
     width: 1000px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .wrapper {
@@ -111,6 +113,14 @@
 
 
 @media screen and (max-width: 768px) {
+    .body-content{
+       
+    }
+    .header{
+        font-size: 18px;
+        width: 100%;
+
+    }
     .wrapper {
         flex-direction: column; /* Stack left and right containers vertically */
         margin: 5%;
