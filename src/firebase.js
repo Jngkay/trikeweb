@@ -157,6 +157,45 @@ $(document).ready(function(){
 
 
 /*Search Users in database */
+$("#searchUserInput").on("input", function () {
+  const searchQuery = $(this).val().toLowerCase();
+  console.log("Search Query:", searchQuery);
+
+  const userTableBody = $(".userTableBody");
+
+  function clearSearchDataRows() {
+    userTableBody.find("tr:gt(0)").remove();
+  }
+
+  const databaseRef = firebase.database().ref("users/");
+
+  // Fetch data from Firebase and filter based on the search query
+  databaseRef.orderByChild("firstname").startAt(searchQuery).endAt(searchQuery + "\uf8ff").on("value", function (snapshot) {
+    console.log("Firebase Query Snapshot:", snapshot);
+    clearSearchDataRows();
+    
+    snapshot.forEach(function (childSnapshot) {
+          const userData = childSnapshot.val();
+          console.log("User Data:", userData);
+
+          const searchnewRow = $("<tr>");
+
+          const firstnameCell = $("<td>").text(userData.firstname);
+          const lastnameCell = $("<td>").text(userData.lastname);
+          const emailCell = $("<td>").text(userData.email);
+          const phoneCell = $("<td>").text(userData.phone);
+
+          // Append table cells to the new row
+          searchnewRow.append(firstnameCell);
+          searchnewRow.append(lastnameCell);
+          searchnewRow.append(emailCell);
+          searchnewRow.append(phoneCell);
+
+          // Append the new row to the table
+          userTableBody.append(searchnewRow);
+      });
+  });
+});
 
 
 
@@ -318,3 +357,42 @@ $(document).ready(function(){
     console.log("Bookings Count: " + bookingsCount);
   });
 })
+
+
+
+
+
+
+$(document).ready(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const plateNo = urlParams.get("plateno"); // Change "plateNo" to "plateno" to match the parameter name in your QR code URL
+  
+  if (plateNo) {
+      // Fetch the driver's data from Firebase based on the plateNo
+      fetchDriverData(plateNo);
+  } else {
+      // Handle the case where the plateNo parameter is missing
+      console.error("Plate number parameter missing.");
+  }
+});
+
+function fetchDriverData(plateNo) {
+  const databaseRef = firebase.database().ref("drivers/" + plateNo);
+  databaseRef.on("value", function(snapshot) {
+      const driverData = snapshot.val();
+      
+      if (driverData) {
+          // Populate the HTML elements with the retrieved data
+          $(".profile-picture img").attr("src", driverData.profilePictureURL);
+          $(".plateNo-box input").val(driverData.plateNo);
+          $(".fullname input").val(driverData.fullname);
+          $(".address input").val(driverData.address);
+          $(".contact input").val(driverData.conNum);
+          $(".email input").val(driverData.email);
+          $(".franchiseNo input").val(driverData.fn);
+          $(".motorType input").val(driverData.mt);
+      } else {
+          console.error("Driver not found");
+      }
+  });
+}
