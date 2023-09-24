@@ -75,6 +75,8 @@ body{
     width: 270px;
     padding: 10px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 50px;
     border: solid 1px black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
