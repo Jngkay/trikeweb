@@ -7,26 +7,39 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background-color: #000;
+.body-content{
+    background-color: lightslategray;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 5%;
+}
+
+.header{
+    background-color: #fbcd22;
+    text-align: center;
+    border-radius: 50px;
+    padding: 10px;
+    border: solid 2px black;
+    width: 1000px;
 }
 
 .wrapper {
     background-color: #fff;
     display: flex;
-    width: 100%;
+    width: 1000px;
     position: relative;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+    border-radius: 20px;
     margin: 5% 20%;
+    border: dashed 2px black;
 }
 
 .left-container{
@@ -37,7 +50,7 @@ body {
     margin-right: 30px;
 }
 .left-container .profile-picture{
-    background-color: blue;
+    background-color: #004AAE;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -50,18 +63,19 @@ body {
 }
 
 .left-container .plateNo-box{
-    background-color: gray;
-    color: white;
+    background-color: #fbcd22;
+    color: black;
     font-size: 25px;
     width: 270px;
     padding: 10px;
     text-align: center;
     border-radius: 50px;
+    border: solid 1px black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.left-container input{
-    border: none;
-    background-color: gray;
-    color: white;
+.left-container p{
+    background-color: transparent;
+    color: black;
     width: 250px;
     font-weight: 800;
     padding: 2px;
@@ -73,45 +87,35 @@ body {
     flex-direction: column;
     align-items: left;
     width: 450px;
+    padding: 0 10%;
 }
 
-.right-container .greetings{
-    background-color: yellow;
-    border-radius: 20px;
-    padding: 2px;
-    text-align: center;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
+.right-container .data{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-.right-container p{
+
+.right-container .data p{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.right-container .data span{
     font-size: 18px;
     font-weight: light;
 }
 
-.right-container input{
-    border: none;
-    color: #000;
-    font-size: 16px;
-    padding: 3px;
-}
-
-.right-container .info{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-.right-container .info .data{
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-right: 10px;
-}
 
 @media screen and (max-width: 768px) {
     .wrapper {
         flex-direction: column; /* Stack left and right containers vertically */
         margin: 5%;
         padding: 20px;
+        width: 100%;
     }
 
     .left-container,
@@ -120,7 +124,32 @@ body {
         margin-right: 0;
     }
 
-    .right-container {
-        align-items: center; /* Center align the content in the right container */
+    .left-container .profile-picture img{
+        width: 150px;
+        height: auto;
     }
+
+    .left-container .plateNo-box{
+        font-size: 18px;
+        width: 170px;
+        margin-bottom: 10px;
+    }
+    .left-container input{
+        width: 70px;
+        font-size: 18px;
+    }
+   
+
+    .right-container {
+        align-items: left; /* Center align the content in the right container */
+    }
+    
+    .right-container .data p{
+        font-size: 14px;
+    }
+    
+    .right-container .data span{
+        font-size: 14px;
+    }
+
 }
