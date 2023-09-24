@@ -318,18 +318,14 @@ $(document).ready(function(){
 
 
 
-
-// profileFirebase.js
-
+/*Profile Page Function */
 $(document).ready(function() {
   const urlParams = new URLSearchParams(window.location.search);
-  const plateNo = urlParams.get("plateno"); // Get the plateNo parameter from the URL
+  const plateNo = urlParams.get("plateno");
 
   if (plateNo) {
-    // Fetch the driver's data from Firebase based on the plateNo
     fetchDriverData(plateNo);
   } else {
-    // Handle the case where the plateNo parameter is missing
     console.error("Plate number parameter missing.");
   }
 });
@@ -340,7 +336,6 @@ function fetchDriverData(plateNo) {
     const driverData = snapshot.val();
 
     if (driverData) {
-      // Populate the HTML elements with the retrieved data
       $("#profile-image").attr("src", driverData.profilePictureURL);
       $("#plateNo-data").text(driverData.plateNo);
       $("#fullname-data").text(driverData.fullname);
@@ -354,3 +349,20 @@ function fetchDriverData(plateNo) {
     }
   });
 }
+
+// Function to trigger the QR code download
+function downloadQRCode() {
+  const canvas = document.getElementById("qrcode canvas");
+  const a = document.createElement("a");
+  a.href = canvas.toDataURL("image/png"); 
+  a.download = "${driverData.fullname}_qrcode.png"; 
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click(); 
+  document.body.removeChild(a); 
+}
+
+$("#downloadQRCode").click(function () {
+  const driverName = $("#fullname-data").text(); 
+  downloadQRCode(driverName);
+});
