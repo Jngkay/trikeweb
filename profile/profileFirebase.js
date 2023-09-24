@@ -1,45 +1,35 @@
-/*const firebaseConfig = {
-    apiKey: "AIzaSyC-JvB2RXrsup4P9oH8IgCwUm1W5Ce08dQ",
-    authDomain: "tricyclebooking-ebe95.firebaseapp.com",
-    databaseURL: "https://tricyclebooking-ebe95-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "tricyclebooking-ebe95",
-    storageBucket: "tricyclebooking-ebe95.appspot.com",
-    messagingSenderId: "211757260511",
-    appId: "1:211757260511:web:08ab4ab453e1eb6c81d36a"
-  };  
-  
-    firebase.initializeApp(firebaseConfig);
+// profileFirebase.js
 
-// Add this code after initializing Firebase
 $(document).ready(function() {
-    const databaseRef = firebase.database().ref("drivers/");
-  
-    // Function to display data based on plateNo
-    function displayData(plateNo) {
-      const driverRef = databaseRef.child(plateNo);
-      driverRef.on("value", function(snapshot) {
-        const driverData = snapshot.val();
-        if (driverData) {
-          // Update HTML elements with the driverData
-          $(".profile-picture img").attr("src", driverData.profilePictureURL);
-          $(".plateNo").text(driverData.plateNo);
-          $(".fullname").text(driverData.fullname);
-          $(".address").text(driverData.address);
-          $(".contact").text(driverData.conNum);
-          $(".email").text(driverData.email);
-          $(".franchiseNo").text(driverData.fn);
-          $(".motorType").text(driverData.mt);
-        } else {
-          // Handle case where no data is found for the given plateNo
-          console.log("Driver not found");
-        }
-      });
-    }
-  
-    // You can call this function with a specific plateNo to display data
-    const plateNoToDisplay = "YOUR_PLATE_NO_HERE";
-    displayData(plateNoToDisplay);
-  });
+  const urlParams = new URLSearchParams(window.location.search);
+  const plateNo = urlParams.get("plateno"); // Get the plateNo parameter from the URL
 
-  */
-  
+  if (plateNo) {
+    // Fetch the driver's data from Firebase based on the plateNo
+    fetchDriverData(plateNo);
+  } else {
+    // Handle the case where the plateNo parameter is missing
+    console.error("Plate number parameter missing.");
+  }
+});
+
+function fetchDriverData(plateNo) {
+  const databaseRef = firebase.database().ref("drivers/" + plateNo);
+  databaseRef.on("value", function(snapshot) {
+    const driverData = snapshot.val();
+
+    if (driverData) {
+      // Populate the HTML elements with the retrieved data
+      $("#profile-image").attr("src", driverData.profilePictureURL);
+      $("#plateNo-data").text(driverData.plateNo);
+      $("#fullname-data").text(driverData.fullname);
+      $("#address-data").text(driverData.address);
+      $("#contact-data").text(driverData.conNum);
+      $("#email-data").text(driverData.email);
+      $("#franNo-data").text(driverData.fn);
+      $("#motor-data").text(driverData.mt);
+    } else {
+      console.error("Driver not found");
+    }
+  });
+}

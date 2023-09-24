@@ -320,7 +320,7 @@ $(document).ready(function(){
 
 
 
-
+/*
 $(document).ready(function() {
   const urlParams = new URLSearchParams(window.location.search);
   const plateNo = urlParams.get("plateno"); // Change "plateNo" to "plateno" to match the parameter name in your QR code URL
@@ -354,4 +354,4 @@ function fetchDriverData(plateNo) {
       }
   });
 }
-
+*/
