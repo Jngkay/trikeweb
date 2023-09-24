@@ -341,14 +341,14 @@ function fetchDriverData(plateNo) {
       
       if (driverData) {
           // Populate the HTML elements with the retrieved data
-          $(".profile-picture img").attr("src", driverData.profilePictureURL);
-          $(".plateNo-data").val(driverData.plateNo);
-          $(".fullname-data").val(driverData.fullname);
-          $(".address-data").val(driverData.address);
-          $(".contact-data").val(driverData.conNum);
-          $(".email-data").val(driverData.email);
-          $(".franNo-data").val(driverData.fn);
-          $(".motor-data").val(driverData.mt);
+          $("#profile-picture img").attr("src", driverData.profilePictureURL);
+          $("#plateNo-data").val(driverData.plateNo);
+          $("#fullname-data").val(driverData.fullname);
+          $("#address-data").val(driverData.address);
+          $("#contact-data").val(driverData.conNum);
+          $("#email-data").val(driverData.email);
+          $("#franNo-data").val(driverData.fn);
+          $("#motor-data").val(driverData.mt);
       } else {
           console.error("Driver not found");
       }
