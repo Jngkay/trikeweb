@@ -162,6 +162,100 @@ $(document).ready(function(){
 
 
 /*Update Method */
+$(".tableBody").on("click", ".edit-btn", function() {
+  const selectedRow = $(this).closest("tr");
+  const driverId = selectedRow.find("td:eq(6)").text();
+  
+  // Fetch data for the selected driver from Firebase
+  const databaseRef = firebase.database().ref("drivers/" + driverId);
+  databaseRef.once('value', (snapshot) => {
+    const driverData = snapshot.val();
+    
+    $("#fullname").val(driverData.fullname);
+    $("#email").val(driverData.email);
+    $("#conNum").val(driverData.conNum);
+    $("#address").val(driverData.address);
+    $("#pword").val(driverData.pword);
+    $("#fn").val(driverData.fn);
+    $("#plateNo").val(driverData.plateNo);
+    $("#mt").val(driverData.mt);
+    $("#available").prop("checked", driverData.available); 
+
+    // Show the existing profile picture
+    const profilePictureUrl = driverData.profilePictureURL;
+    $(".current-profile-picture").attr("src", profilePictureUrl);
+
+    // Show the modal in "Edit" mode
+    $("#submit-btn").text("Update"); // Change button text to "Update"
+    // Enable the profile picture input for updates
+    $("#profilePicture").prop("disabled", false);
+    
+    $("#AddDriverModal").show();
+  });
+});
+
+// Update data in Firebase when the modal is submitted in "Edit" mode
+$("#submit-btn").click(function(e) {
+  e.preventDefault();
+  
+  const driverId = $("#plateNo").val(); 
+  
+  // Fetch the current data for the driver from Firebase
+  const databaseRef = firebase.database().ref("drivers/" + driverId);
+  databaseRef.once('value', (snapshot) => {
+    const currentDriverData = snapshot.val();
+    
+    currentDriverData.fullname = $("#fullname").val();
+    currentDriverData.email = $("#email").val();
+    currentDriverData.conNum = $("#conNum").val();
+    currentDriverData.address = $("#address").val();
+    currentDriverData.pword = $("#pword").val();
+    currentDriverData.fn = $("#fn").val();
+    currentDriverData.mt = $("#mt").val();
+    currentDriverData.available = $("#available").prop("checked"); 
+
+    // Check if a new profile picture was selected
+    const profilePictureInput = document.getElementById("profilePicture");
+    const newProfilePictureFile = profilePictureInput.files[0];
+
+    if (newProfilePictureFile) {
+      // Upload the new profile picture to Firebase Storage
+      const storage = firebase.storage();
+      const storageRef = storage.ref();
+      const profilePictureRef = storageRef.child("profilePictures/" + driverId);
+
+      profilePictureRef.put(newProfilePictureFile).then((snapshot) => {
+        snapshot.ref.getDownloadURL().then((downloadURL) => {
+          currentDriverData.profilePictureURL = downloadURL;
+
+          // Update the data in Firebase
+          databaseRef.set(currentDriverData)
+            .then(function() {
+              alert("Driver Data and Profile Picture updated successfully.");
+              
+              $("#cancel-btn").click();
+            })
+            .catch(function(error) {
+              console.error("Error: ", error);
+              alert("An error occurred while updating the driver data.");
+            });
+        });
+      });
+    } else {
+      // If no new profile picture was selected, update the data without uploading a new picture
+      databaseRef.set(currentDriverData)
+        .then(function() {
+          alert("Driver Data updated successfully.");
+         
+          $("#cancel-btn").click();
+        })
+        .catch(function(error) {
+          console.error("Error: ", error);
+          alert("An error occurred while updating the driver data.");
+        });
+    }
+  });
+});
 
 
 
