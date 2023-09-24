@@ -161,7 +161,7 @@ $(document).ready(function(){
 
 
 
-/*Update Method 
+/*Update Method */
 $(".tableBody").on("click", ".edit-btn", function() {
   const selectedRow = $(this).closest("tr");
   
@@ -258,7 +258,7 @@ $("#submit-btn").click(function(e) {
     }
   });
 });
-*/
+
 
 
 
