@@ -413,37 +413,37 @@ $(document).ready(function(){
 /*Search Reports in database */
 $(document).ready(function () {
   $("#searchReportInput").on("input", function () {
-    const searchreportQuery = $(this).val().toLowerCase();
-    filterAndDisplayReportData(searchreportQuery);
+    const searchQuery = $(this).val().toLowerCase();
+    filterAndDisplayReportData(searchQuery);
   });
-  function filterAndDisplayReportData(searchreportQuery) {
+  function filterAndDisplayReportData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
 
-  // reportclearDataRows(); 
+    reportclearDataRows(); 
 
-  databaseRef.orderByChild("userRating").on("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-      const reportData = childSnapshot.val();
+    databaseRef.orderByChild("userRating").on("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        const reportData = childSnapshot.val();
 
-      if (
-        reportData.driverID.firstname.toLowerCase().includes(searchreportQuery) ||
-        reportData.userRating.toLowerCase().includes(searchreportQuery) ||
-        reportData.userReport.toLowerCase().includes(searchreportQuery) ||
-        reportData.booking_time.toLowerCase().includes(searchreportQuery)
-      ) {
-        const newreportrow = $("<tr>");
-        newreportrow.append($("<td>").text(reportData.driverID.fullname));
-        newreportrow.append($("<td>").text(reportData.userRating));
-        newreportrow.append($("<td>").text(reportData.userReport));
-        newreportrow.append($("<td>").text(reportData.booking_time));
+        if (
+          reportData.driverID.firstname.toLowerCase().includes(searchQuery) ||
+          reportData.userRating.toLowerCase().includes(searchQuery) ||
+          reportData.userReport.toLowerCase().includes(searchQuery) ||
+          reportData.booking_time.toLowerCase().includes(searchQuery)
+        ) {
+          const newreportrow = $("<tr>");
+          newreportrow.append($("<td>").text(reportData.driverID.fullname));
+          newreportrow.append($("<td>").text(reportData.userRating));
+          newreportrow.append($("<td>").text(reportData.userReport));
+          newreportrow.append($("<td>").text(reportData.booking_time));
 
-        $(".reportTableBody").append(newreportrow);
-      }
+          $(".reportTableBody").append(newreportrow);
+        }
+      });
     });
-  });
-}
-function reportclearDataRows() {
-  $('.reportTableBody').find("tr:gt(0)").remove();
-}
+  }
+  function reportclearDataRows() {
+    $('.reportTableBody').find("tr:gt(0)").remove();
+  }
 });
 
