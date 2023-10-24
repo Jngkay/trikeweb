@@ -419,9 +419,11 @@ $(document).ready(function () {
   function filterAndDisplayReportData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
 
-    reportclearDataRows(); 
+     
 
     databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
+
+      reportclearDataRows();
       snapshot.forEach(function (childSnapshot) {
         const reportData = childSnapshot.val();
 
