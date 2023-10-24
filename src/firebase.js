@@ -158,7 +158,7 @@ $(document).ready(function(){
 
 
 /*Update Method */
-$(document).on("click", ".edit-btn", function () {
+$(".tableBody").on("click", ".edit-btn", function () {
   
   const selectedRow = $(this).closest("tr");
   const driverId = selectedRow.find("td:eq(7)").text();
