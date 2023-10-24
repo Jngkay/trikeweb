@@ -419,7 +419,7 @@ $(document).ready(function () {
   function filterAndDisplayReportData(searchreportQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
 
-  reportclearDataRows(); 
+  // reportclearDataRows(); 
 
   databaseRef.orderByChild("userRating").on("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
