@@ -8,6 +8,8 @@ $(document).ready(function() {
 
     var closeModalBtn = $("#closeModalBtn");
     var cancelBtn = $("#cancel-btn");
+
+    var updateModalClose = $("update-modal-close");
   
     // Open the modal
     openModalBtn.click(function() {
@@ -28,6 +30,10 @@ $(document).ready(function() {
       qrmodal.hide();
       $('#qrcode').html("");
     });
+
+    updateModalClose.click(function(){
+      modal.hide();
+    })
   
     // Close the modal if the user clicks outside of it
     $(window).click(function(event) {
