@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/create-modal.css">
+    <link rel="stylesheet" href="../css/update-modal.css">
     <link rel="stylesheet" href="../css/drivers.css">
     <link rel="stylesheet" href="../css/users.css">
     <link rel="stylesheet" href="../css/reports.css">
@@ -90,22 +91,23 @@
                 </div>
             </div>
 
-            <!--Users content-->
+            <!--Reports content-->
             <div id="reports" class="page">
                 <div class="body-content">
                     <div class="header">
                         <h2>REPORTS</h2>
                         <div class="reports-searchbar">
-                            <input type="text" class="searchInput" placeholder="search" id="searchInput" >
+                            <input type="text" class="searchInput" placeholder="search" id="searchReportInput" >
                         </div>
                     </div>
                     <div class="reportTable-wrapper">
                         <table class="reportTableBody">
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
+                                <!-- <th>User</th> -->
+                                <th>Driver</th>
+                                <th>Rating</th>
+                                <th>Claims</th>
+                                <th>Data & Time</th>
                             </tr>
                         </table>
                     </div>
@@ -136,6 +138,9 @@
                         </table>
                     </div>
                 </div>
+
+                
+
             </div>
             
             <!--START: Create Modal Section-->
@@ -172,6 +177,41 @@
                 </div>
             </div>
 
+            <!--START: Update Modal Section-->
+            <div id="UpdateDriverModal" class="update-modal-wrapper">
+                <div id="update-modal" class="update-modal">
+                    <div class="update-modal-content">
+                        <span class="update-modal-close">&times;</span>
+                        <h2>Update Driver Information</h2>
+                        <hr>
+                        <form class="update-form" id="update-driver-form" novalidate>
+                            <div class="two-column">
+                                <div class="column">
+                                    <input type="file" id="profilePicture" accept="image/*">
+                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required>
+                                    <input type="email" name="email" id="email" placeholder="Email" required>
+                                    <input type="number" name="conNum" id="conNum" placeholder="Contact No." required>
+                                    <input type="text" name="address" id="address" placeholder="Address" required>
+                                </div>
+                                <div class="column">
+                                    <input type="text" name="pword" id="pword" placeholder="Password" required>
+                                    <input type="text" name="fn" id="fn" placeholder="Franchise No." required>
+                                    <input type="text" name="plateNo" id="plateNo" placeholder="Plate No." required>
+                                    <input type="text" name="mt" id="mt" placeholder="Motor Type" required>
+                                    <label for="available">Available:</label>
+                                    <input type="checkbox" id="available" name="available">
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <button type="submit" id="update-btn" class="update-btn">Update</button>
+                                <button type="cancel" id="cancel-update-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
 
             <div id="qrModalView" class="modal-wrapper">
                 <div id="create-modal" class="create-modal">
