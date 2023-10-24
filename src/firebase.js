@@ -115,7 +115,7 @@ $(document).ready(function(){
         $('#qrcode').qrcode("http://dhrrp2trikeapp.com/profile/profile.html?plateno=" + driverData.plateNo);	
       }));
       row.append(qrCell);
-
+      
       row.append($("<td>").text(driverData.available));
 
       const actionCell = $("<td>");
@@ -156,46 +156,39 @@ $(document).ready(function(){
 });
 
 
-/*Search Users in database */
-
-
-
 
 /*Update Method */
-$(".tableBody").on("click", ".edit-btn", function() {
-  const selectedRow = $(this).closest("tr");
-  const driverId = selectedRow.find("td:eq(6)").text();
+$(document).on("click", ".edit-btn", function () {
   
-  // Fetch data for the selected driver from Firebase
+  const selectedRow = $(this).closest("tr");
+  const driverId = selectedRow.find("td:eq(7)").text();
+
   const databaseRef = firebase.database().ref("drivers/" + driverId);
   databaseRef.once('value', (snapshot) => {
-    const driverData = snapshot.val();
-    
-    $("#fullname").val(driverData.fullname);
-    $("#email").val(driverData.email);
-    $("#conNum").val(driverData.conNum);
-    $("#address").val(driverData.address);
-    $("#pword").val(driverData.pword);
-    $("#fn").val(driverData.fn);
-    $("#plateNo").val(driverData.plateNo);
-    $("#mt").val(driverData.mt);
-    $("#available").prop("checked", driverData.available); 
+    const driverUpdata = snapshot.val();
 
-    // Show the existing profile picture
+    $("#fullname").val(driverUpdata.fullname);
+    $("#email").val(driverUpdata.email);
+    $("#conNum").val(driverUpdata.conNum);
+    $("#address").val(driverUpdata.address);
+    $("#pword").val(driverUpdata.pword);
+    $("#fn").val(driverUpdata.fn);
+    $("#plateNo").val(driverUpdata.plateNo);
+    $("#mt").val(driverUpdata.mt);
+    $("#available").prop("checked", driverUpdata.available); 
+
     const profilePictureUrl = driverData.profilePictureURL;
     $(".current-profile-picture").attr("src", profilePictureUrl);
 
-    // Show the modal in "Edit" mode
-    $("#submit-btn").text("Update"); // Change button text to "Update"
     // Enable the profile picture input for updates
     $("#profilePicture").prop("disabled", false);
-    
-    $("#AddDriverModal").show();
-  });
-});
 
-// Update data in Firebase when the modal is submitted in "Edit" mode
-$("#submit-btn").click(function(e) {
+    // Show the update modal
+    $("#UpdateDriverModal").show();
+  })
+
+
+  $("#update-btn").click(function(e) {
   e.preventDefault();
   
   const driverId = $("#plateNo").val(); 
@@ -233,7 +226,7 @@ $("#submit-btn").click(function(e) {
             .then(function() {
               alert("Driver Data and Profile Picture updated successfully.");
               
-              $("#cancel-btn").click();
+              $("#cancel-update-btn").click();
             })
             .catch(function(error) {
               console.error("Error: ", error);
@@ -247,7 +240,7 @@ $("#submit-btn").click(function(e) {
         .then(function() {
           alert("Driver Data updated successfully.");
          
-          $("#cancel-btn").click();
+          $("#cancel-update-btn").click();
         })
         .catch(function(error) {
           console.error("Error: ", error);
@@ -255,6 +248,8 @@ $("#submit-btn").click(function(e) {
         });
     }
   });
+});
+
 });
 
 
@@ -277,8 +272,6 @@ function deleteDriver(driverId) {
 }
 
 
-
-
 // Fetch the count of users
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("users/");
@@ -292,7 +285,6 @@ $(document).ready(function(){
 
 
 // Fetch the count of drivers
-
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
  
@@ -351,4 +343,107 @@ function fetchDriverData(plateNo) {
 }
 
 // Function to trigger the QR code download
+
+
+
+/*Search Users in database */
+$(document).ready(function () {
+  $("#searchUserInput").on("input", function () {
+    const searchQuery = $(this).val().toLowerCase();
+    filterAndDisplayUserData(searchQuery);
+  });
+  function filterAndDisplayUserData(searchQuery) {
+  const databaseRef = firebase.database().ref("users/");
+
+  userclearDataRows();
+
+  databaseRef.orderByChild("firstname").on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      const userData = childSnapshot.val();
+
+      if (
+        userData.firstname.toLowerCase().includes(searchQuery) ||
+        userData.lastname.toLowerCase().includes(searchQuery) ||
+        userData.email.toLowerCase().includes(searchQuery) ||
+        userData.phone.toLowerCase().includes(searchQuery)
+      ) {
+        const newrow = $("<tr>");
+        newrow.append($("<td>").text(userData.firstname));
+        newrow.append($("<td>").text(userData.lastname));
+        newrow.append($("<td>").text(userData.email));
+        newrow.append($("<td>").text(userData.phone));
+
+        $(".userTableBody").append(newrow);
+      }
+    });
+  });
+}
+function userclearDataRows() {
+  $('.userTableBody').find("tr:gt(0)").remove();
+}
+});
+
+
+/*Reports Read Method */
+$(document).ready(function(){
+  const databaseRef = firebase.database().ref("active_bookings/");
+  const reportTableBody = $(".reportTableBody"); 
+
+  function reportclearDataRows() {
+    reportTableBody.find("tr:gt(0)").remove();
+  }
+
+  databaseRef.orderByChild("userRating").on("value", function(snapshot) {
+    reportclearDataRows(); 
+
+    snapshot.forEach(function(childSnapshot) {
+      const reportData = childSnapshot.val();
+      const newrow = $("<tr>");
+      // newrow.append($("<td>").text(reportData.userID));
+      newrow.append($("<td>").text(reportData.driverID.fullname));
+      newrow.append($("<td>").text(reportData.userRating))
+      newrow.append($("<td>").text(reportData.userReport));
+      newrow.append($("<td>").text(reportData.booking_time));
+
+      reportTableBody.append(newrow);
+    });
+  });
+});
+
+/*Search Reports in database */
+$(document).ready(function () {
+  $("#searchReportInput").on("input", function () {
+    const searchreportQuery = $(this).val().toLowerCase();
+    filterAndDisplayReportData(searchreportQuery);
+  });
+  function filterAndDisplayReportData(searchreportQuery) {
+  const databaseRef = firebase.database().ref("active_bookings/");
+
+  reportclearDataRows(); 
+
+  databaseRef.orderByChild("userRating").on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      const reportData = childSnapshot.val();
+
+      if (
+        reportData.driverID.firstname.toLowerCase().includes(searchreportQuery) ||
+        reportData.userRating.toLowerCase().includes(searchreportQuery) ||
+        reportData.userReport.toLowerCase().includes(searchreportQuery) ||
+        reportData.booking_time.toLowerCase().includes(searchreportQuery)
+      ) {
+        const newreportrow = $("<tr>");
+        newreportrow.append($("<td>").text(reportData.driverID.fullname));
+        newreportrow.append($("<td>").text(reportData.userRating));
+        newreportrow.append($("<td>").text(reportData.userReport));
+        newreportrow.append($("<td>").text(reportData.booking_time));
+
+        $(".reportTableBody").append(newreportrow);
+      }
+    });
+  });
+}
+function reportclearDataRows() {
+  $('.reportTableBody').find("tr:gt(0)").remove();
+}
+});
 
