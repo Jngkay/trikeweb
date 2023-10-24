@@ -393,7 +393,7 @@ $(document).ready(function(){
     reportTableBody.find("tr:gt(0)").remove();
   }
 
-  databaseRef.orderByChild("userRating").on("value", function(snapshot) {
+  databaseRef.orderByChild("booking_time").on("value", function(snapshot) {
     reportclearDataRows(); 
 
     snapshot.forEach(function(childSnapshot) {
@@ -421,7 +421,7 @@ $(document).ready(function () {
 
     reportclearDataRows(); 
 
-    databaseRef.orderByChild("userRating").on("value", function (snapshot) {
+    databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         const reportData = childSnapshot.val();
 
