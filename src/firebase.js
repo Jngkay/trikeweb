@@ -157,9 +157,8 @@ $(document).ready(function(){
 
 
 
-/*Update Method */
+/*Update Method */let driverUpdata;
 $(".tableBody").on("click", ".edit-btn", function () {
-  
   const selectedRow = $(this).closest("tr");
   const driverId = selectedRow.find("td:eq(7)").text();
 
@@ -177,7 +176,7 @@ $(".tableBody").on("click", ".edit-btn", function () {
     $("#mt").val(driverUpdata.mt);
     $("#available").prop("checked", driverUpdata.available); 
 
-    const profilePictureUrl = driverData.profilePictureURL;
+    const profilePictureUrl = driverUpData.profilePictureURL;
     $(".current-profile-picture").attr("src", profilePictureUrl);
 
     // Enable the profile picture input for updates
@@ -185,71 +184,40 @@ $(".tableBody").on("click", ".edit-btn", function () {
 
     // Show the update modal
     $("#UpdateDriverModal").show();
-  })
-
-
-  $("#update-btn").click(function(e) {
-    e.preventDefault();
-    
-    const driverId = $("#plateNo").val(); 
-    
-    // Fetch the current data for the driver from Firebase
-    const databaseRef = firebase.database().ref("drivers/" + driverId);
-    databaseRef.once('value', (snapshot) => {
-      const currentDriverData = snapshot.val();
+  
+    $("#update-btn").click(function(e) {
+      e.preventDefault();
       
-      currentDriverData.fullname = $("#fullname").val();
-      currentDriverData.email = $("#email").val();
-      currentDriverData.conNum = $("#conNum").val();
-      currentDriverData.address = $("#address").val();
-      currentDriverData.pword = $("#pword").val();
-      currentDriverData.fn = $("#fn").val();
-      currentDriverData.mt = $("#mt").val();
-      currentDriverData.available = $("#available").prop("checked"); 
-
-      // Check if a new profile picture was selected
-      const profilePictureInput = document.getElementById("profilePicture");
-      const newProfilePictureFile = profilePictureInput.files[0];
-
-      if (newProfilePictureFile) {
-        // Upload the new profile picture to Firebase Storage
-        const storage = firebase.storage();
-        const storageRef = storage.ref();
-        const profilePictureRef = storageRef.child("profilePictures/" + driverId);
-
-        profilePictureRef.put(newProfilePictureFile).then((snapshot) => {
-          snapshot.ref.getDownloadURL().then((downloadURL) => {
-            currentDriverData.profilePictureURL = downloadURL;
-
-            // Update the data in Firebase
-            databaseRef.set(currentDriverData)
-              .then(function() {
-                alert("Driver Data and Profile Picture updated successfully.");
-                
-                $("#cancel-update-btn").click();
-              })
-              .catch(function(error) {
-                console.error("Error: ", error);
-                alert("An error occurred while updating the driver data.");
-              });
-          });
-        });
-      } else {
-        // If no new profile picture was selected, update the data without uploading a new picture
+      const driverId = $("#plateNo").val(); 
+      
+      // Fetch the current data for the driver from Firebase
+      const databaseRef = firebase.database().ref("drivers/" + driverId);
+      databaseRef.once('value', (snapshot) => {
+        const currentDriverData = snapshot.val();
+        
+        currentDriverData.fullname = $("#fullname").val();
+        currentDriverData.email = $("#email").val();
+        currentDriverData.conNum = $("#conNum").val();
+        currentDriverData.address = $("#address").val();
+        currentDriverData.pword = $("#pword").val();
+        currentDriverData.fn = $("#fn").val();
+        currentDriverData.mt = $("#mt").val();
+        currentDriverData.available = $("#available").prop("checked"); 
+  
+        // Update the data in Firebase
         databaseRef.set(currentDriverData)
           .then(function() {
             alert("Driver Data updated successfully.");
-          
+            
             $("#cancel-update-btn").click();
           })
           .catch(function(error) {
             console.error("Error: ", error);
             alert("An error occurred while updating the driver data.");
           });
-      }
+      });
     });
   });
-
 });
 
 
@@ -342,9 +310,6 @@ function fetchDriverData(plateNo) {
   });
 }
 
-// Function to trigger the QR code download
-
-
 
 /*Search Users in database */
 $(document).ready(function () {
@@ -383,6 +348,7 @@ function userclearDataRows() {
 }
 });
 
+
 /*Search Reports in database */
 $(document).ready(function () {
   $("#searchReportInput").on("input", function () {
@@ -420,6 +386,7 @@ function userclearDataRows() {
 }
 });
 
+
 /*Reports Read Method */
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("active_bookings/");
@@ -435,10 +402,14 @@ $(document).ready(function(){
     snapshot.forEach(function(childSnapshot) {
       const reportData = childSnapshot.val();
       const newrow = $("<tr>");
-      // newrow.append($("<td>").text(reportData.userID));
+
       newrow.append($("<td>").text(reportData.driverID.fullname));
-      newrow.append($("<td>").text(reportData.userRating))
-      newrow.append($("<td>").text(reportData.userReport));
+      newrow.append($("<td>").text(reportData.userRating || 0))
+      if (reportData.userReport && reportData.userReport.trim() !== "") {
+        newrow.append($("<td>").text(reportData.userReport));
+      } else {
+        newrow.append($("<td>").text("N/A"));
+      }
       newrow.append($("<td>").text(reportData.booking_time));
 
       reportTableBody.append(newrow);
