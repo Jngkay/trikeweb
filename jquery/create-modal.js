@@ -8,8 +8,9 @@ $(document).ready(function() {
 
     var closeModalBtn = $("#closeModalBtn");
     var cancelBtn = $("#cancel-btn");
+    var cancelUpBtn = $("#cancel-update-btn");
 
-    var HideUpModal = $("#UpdateDriverModal")
+    var UpModal = $("#UpdateDriverModal")
     var updateModalClose = $("update-modal-close");
   
     // Open the modal
@@ -33,11 +34,15 @@ $(document).ready(function() {
       modal.hide();
       qrmodal.hide();
       $('#qrcode').html("");
-      HideUpModal.hide();
+     
     });
 
+    cancelUpBtn.click(function(){
+      UpModal.hide()
+    })
+
     updateModalClose.click(function(){
-      HideUpModal.hide();
+      UpModal.hide();
     })
   
     // Close the modal if the user clicks outside of it
