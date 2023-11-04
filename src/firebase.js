@@ -155,68 +155,167 @@ $(document).ready(function(){
   });
 });
 
+/*Search Users in database */
+$(document).ready(function () {
+  $("#searchUserInput").on("input", function () {
+    const searchQuery = $(this).val().toLowerCase();
+    filterAndDisplayUserData(searchQuery);
+  });
+  function filterAndDisplayUserData(searchQuery) {
+  const databaseRef = firebase.database().ref("users/");
+
+  userclearDataRows();
+
+  databaseRef.orderByChild("firstname").on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      const userData = childSnapshot.val();
+
+      if (
+        userData.firstname.toLowerCase().includes(searchQuery) ||
+        userData.lastname.toLowerCase().includes(searchQuery) ||
+        userData.email.toLowerCase().includes(searchQuery) ||
+        userData.phone.toLowerCase().includes(searchQuery)
+      ) {
+        const newrow = $("<tr>");
+        newrow.append($("<td>").text(userData.firstname));
+        newrow.append($("<td>").text(userData.lastname));
+        newrow.append($("<td>").text(userData.email));
+        newrow.append($("<td>").text(userData.phone));
+
+        $(".userTableBody").append(newrow);
+      }
+    });
+  });
+}
+function userclearDataRows() {
+  $('.userTableBody').find("tr:gt(0)").remove();
+}
+});
 
 
 /*Update Method */let driverUpdata;
+// $(".tableBody").on("click", ".edit-btn", function () {
+//   const selectedRow = $(this).closest("tr");
+//   const driverId = selectedRow.find("td:eq(6)").text();
+
+//   const databaseRef = firebase.database().ref("drivers/" + driverId);
+//   databaseRef.once('value', (snapshot) => {
+//     const driverdata = snapshot.val();
+
+//     $("#fullname").val(driverdata.fullname);
+//     $("#email").val(driverdata.email);
+//     $("#conNum").val(driverdata.conNum);
+//     $("#address").val(driverdata.address);
+//     $("#pword").val(driverdata.pword);
+//     $("#fn").val(driverdata.fn);
+//     $("#plateNo").val(driverdata.plateNo);
+//     $("#mt").val(driverdata.mt);
+//     $("#available").prop("checked", driverdata.available); 
+
+//     $(".current-profile-picture").attr("src", driverData.profilePictureURL);
+//     // Enable the profile picture input for updates
+//     $("#profilePicture").prop("disabled", false);
+
+//     // Show the update modal
+//     $("#UpdateDriverModal").show();
+  
+//     $("#update-btn").click(function(e) {
+//       e.preventDefault();
+      
+//       const driverId = $("#plateNo").val(); 
+      
+//       // Fetch the current data for the driver from Firebase
+//       const databaseRef = firebase.database().ref("drivers/" + driverId);
+//       databaseRef.once('value', (snapshot) => {
+//         const currentDriverData = snapshot.val();
+        
+//         currentDriverData.fullname = $("#fullname").val();
+//         currentDriverData.email = $("#email").val();
+//         currentDriverData.conNum = $("#conNum").val();
+//         currentDriverData.address = $("#address").val();
+//         currentDriverData.pword = $("#pword").val();
+//         currentDriverData.fn = $("#fn").val();
+//         currentDriverData.mt = $("#mt").val();
+//         currentDriverData.available = $("#available").prop("checked"); 
+  
+//         // Update the data in Firebase
+//         databaseRef.set(currentDriverData)
+//           .then(function() {
+//             alert("Driver Data updated successfully.");
+            
+//             $("#cancel-update-btn").click(function(){
+//               $("#UpdateDriverModal").hide();
+//             });
+//           })
+//           .catch(function(error) {
+//             console.error("Error: ", error);
+//             alert("An error occurred while updating the driver data.");
+//           });
+//       });
+//     });
+//   });
+// });
+
 $(".tableBody").on("click", ".edit-btn", function () {
   const selectedRow = $(this).closest("tr");
-  const driverId = selectedRow.find("td:eq(7)").text();
+  const driverId = selectedRow.find("td:eq(6)").text(); 
 
   const databaseRef = firebase.database().ref("drivers/" + driverId);
   databaseRef.once('value', (snapshot) => {
-    const driverUpdata = snapshot.val();
+    const driverData = snapshot.val();
 
-    $("#fullname").val(driverUpdata.fullname);
-    $("#email").val(driverUpdata.email);
-    $("#conNum").val(driverUpdata.conNum);
-    $("#address").val(driverUpdata.address);
-    $("#pword").val(driverUpdata.pword);
-    $("#fn").val(driverUpdata.fn);
-    $("#plateNo").val(driverUpdata.plateNo);
-    $("#mt").val(driverUpdata.mt);
-    $("#available").prop("checked", driverUpdata.available); 
+    if (driverData) {
+      $("#fullname").val(driverData.fullname);
+      $("#email").val(driverData.email);
+      $("#conNum").val(driverData.conNum);
+      $("#address").val(driverData.address);
+      $("#pword").val(driverData.pword);
+      $("#fn").val(driverData.fn);
+      $("#plateNo").val(driverData.plateNo);
+      $("#mt").val(driverData.mt);
+      $("#available").prop("checked", driverData.available);
 
-    const profilePictureUrl = driverUpData.profilePictureURL;
-    $(".current-profile-picture").attr("src", profilePictureUrl);
+      $(".current-profile-picture").attr("src", driverData.profilePictureURL);
+      $("#profilePicture").prop("disabled", false);
 
-    // Enable the profile picture input for updates
-    $("#profilePicture").prop("disabled", false);
+      $("#UpdateDriverModal").show();
 
-    // Show the update modal
-    $("#UpdateDriverModal").show();
-  
-    $("#update-btn").click(function(e) {
-      e.preventDefault();
-      
-      const driverId = $("#plateNo").val(); 
-      
-      // Fetch the current data for the driver from Firebase
-      const databaseRef = firebase.database().ref("drivers/" + driverId);
-      databaseRef.once('value', (snapshot) => {
-        const currentDriverData = snapshot.val();
+      // Add an event listener to the update button within the modal
+      $("#update-btn").off("click").on("click", function(e) {
+        e.preventDefault();
         
-        currentDriverData.fullname = $("#fullname").val();
-        currentDriverData.email = $("#email").val();
-        currentDriverData.conNum = $("#conNum").val();
-        currentDriverData.address = $("#address").val();
-        currentDriverData.pword = $("#pword").val();
-        currentDriverData.fn = $("#fn").val();
-        currentDriverData.mt = $("#mt").val();
-        currentDriverData.available = $("#available").prop("checked"); 
-  
-        // Update the data in Firebase
-        databaseRef.set(currentDriverData)
-          .then(function() {
-            alert("Driver Data updated successfully.");
-            
-            $("#cancel-update-btn").click();
-          })
-          .catch(function(error) {
-            console.error("Error: ", error);
-            alert("An error occurred while updating the driver data.");
-          });
+        const driverId = $("#plateNo").val();
+        
+        // Fetch the current data for the driver from Firebase
+        const databaseRef = firebase.database().ref("drivers/" + driverId);
+        databaseRef.once('value', (snapshot) => {
+          const currentDriverData = snapshot.val();
+          
+          currentDriverData.fullname = $("#fullname").val();
+          currentDriverData.email = $("#email").val();
+          currentDriverData.conNum = $("#conNum").val();
+          currentDriverData.address = $("#address").val();
+          currentDriverData.pword = $("#pword").val();
+          currentDriverData.fn = $("#fn").val();
+          currentDriverData.mt = $("#mt").val();
+          currentDriverData.available = $("#available").prop("checked"); 
+
+          // Update the data in Firebase
+          databaseRef.set(currentDriverData)
+            .then(function() {
+              alert("Driver Data updated successfully.");
+              
+              $("#cancel-btn").click();
+            })
+            .catch(function(error) {
+              console.error("Error: ", error);
+              alert("An error occurred while updating the driver data.");
+            });
+        });
       });
-    });
+    } else {
+      console.error("Driver not found");
+    }
   });
 });
 
@@ -251,7 +350,6 @@ $(document).ready(function(){
   });
 })
 
-
 // Fetch the count of drivers
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("drivers/");
@@ -262,7 +360,6 @@ $(document).ready(function(){
     console.log("Drivers Count: " + availableDrivers);
   });
 });
-
 
 // Fetch the count of active bookings
 $(document).ready(function(){
@@ -311,42 +408,7 @@ function fetchDriverData(plateNo) {
 }
 
 
-/*Search Users in database */
-$(document).ready(function () {
-  $("#searchUserInput").on("input", function () {
-    const searchQuery = $(this).val().toLowerCase();
-    filterAndDisplayUserData(searchQuery);
-  });
-  function filterAndDisplayUserData(searchQuery) {
-  const databaseRef = firebase.database().ref("users/");
 
-  userclearDataRows();
-
-  databaseRef.orderByChild("firstname").on("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-      const userData = childSnapshot.val();
-
-      if (
-        userData.firstname.toLowerCase().includes(searchQuery) ||
-        userData.lastname.toLowerCase().includes(searchQuery) ||
-        userData.email.toLowerCase().includes(searchQuery) ||
-        userData.phone.toLowerCase().includes(searchQuery)
-      ) {
-        const newrow = $("<tr>");
-        newrow.append($("<td>").text(userData.firstname));
-        newrow.append($("<td>").text(userData.lastname));
-        newrow.append($("<td>").text(userData.email));
-        newrow.append($("<td>").text(userData.phone));
-
-        $(".userTableBody").append(newrow);
-      }
-    });
-  });
-}
-function userclearDataRows() {
-  $('.userTableBody').find("tr:gt(0)").remove();
-}
-});
 
 
 /*Search Reports in database */
@@ -358,32 +420,34 @@ $(document).ready(function () {
   function filterAndDisplayUserData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
 
-  userclearDataRows();
+  $('.reportTableBody').find("tr:gt(0)").remove();
 
   databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-      const userData = childSnapshot.val();
+      const reportData = childSnapshot.val();
 
       if (
-        userData.driverID.fullname.toLowerCase().includes(searchQuery) ||
-        userData.userRating.toLowerCase().includes(searchQuery) ||
-        userData.userReport.toLowerCase().includes(searchQuery) ||
-        userData.booking_time.toLowerCase().includes(searchQuery)
+        reportData.driverID.fullname.toLowerCase().includes(searchQuery) ||
+        reportData.userRating.toLowerCase().includes(searchQuery) ||
+        reportData.userReport.toLowerCase().includes(searchQuery) ||
+        reportData.booking_time.toLowerCase().includes(searchQuery)
       ) {
         const newrow = $("<tr>");
-        newrow.append($("<td>").text(userData.driverID.fullname));
-        newrow.append($("<td>").text(userData.userRating));
-        newrow.append($("<td>").text(userData.userReport));
-        newrow.append($("<td>").text(userData.booking_time));
+        newrow.append($("<td>").text(reportData.driverID.fullname));
+        newrow.append($("<td>").text(reportData.userRating || 0))
+        if (reportData.userReport && reportData.userReport.trim() !== "") {
+          newrow.append($("<td>").text(reportData.userReport));
+        } else {
+          newrow.append($("<td>").text("N/A"));
+        }
+        newrow.append($("<td>").text(reportData.booking_time));
 
         $(".reportTableBody").append(newrow);
       }
     });
   });
 }
-function userclearDataRows() {
-  $('.reportTableBody').find("tr:gt(0)").remove();
-}
+
 });
 
 
