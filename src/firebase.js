@@ -29,7 +29,7 @@ const firebaseConfig = {
     const profilePictureFile = profilePictureInput.files[0];
 
     if (!profilePictureFile) {
-      const confirmation = window.confirm("Please select a profile picture when you ADD a Driver. Click 'Cancel' when UPDATING without the Profile Picture.");
+      const confirmation = window.confirm("Please select a profile picture when you ADD a Driver. Click 'Cancel' when UPDATING.");
       if (!confirmation) {
         // User clicked 'Cancel'
         return;
@@ -231,7 +231,7 @@ $(".tableBody").on("click", ".edit-btn", function() {
     // Show the modal in "Edit" mode
     $("#submit-btn").text("Update"); // Change button text to "Update"
     // Enable the profile picture input for updates
-    $("#profilePicture").prop("disabled", false);
+    $("#profilePicture").prop("disabled", true);
     
     $("#AddDriverModal").show();
   });
