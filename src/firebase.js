@@ -189,66 +189,66 @@ $(".tableBody").on("click", ".edit-btn", function () {
 
 
   $("#update-btn").click(function(e) {
-  e.preventDefault();
-  
-  const driverId = $("#plateNo").val(); 
-  
-  // Fetch the current data for the driver from Firebase
-  const databaseRef = firebase.database().ref("drivers/" + driverId);
-  databaseRef.once('value', (snapshot) => {
-    const currentDriverData = snapshot.val();
+    e.preventDefault();
     
-    currentDriverData.fullname = $("#fullname").val();
-    currentDriverData.email = $("#email").val();
-    currentDriverData.conNum = $("#conNum").val();
-    currentDriverData.address = $("#address").val();
-    currentDriverData.pword = $("#pword").val();
-    currentDriverData.fn = $("#fn").val();
-    currentDriverData.mt = $("#mt").val();
-    currentDriverData.available = $("#available").prop("checked"); 
+    const driverId = $("#plateNo").val(); 
+    
+    // Fetch the current data for the driver from Firebase
+    const databaseRef = firebase.database().ref("drivers/" + driverId);
+    databaseRef.once('value', (snapshot) => {
+      const currentDriverData = snapshot.val();
+      
+      currentDriverData.fullname = $("#fullname").val();
+      currentDriverData.email = $("#email").val();
+      currentDriverData.conNum = $("#conNum").val();
+      currentDriverData.address = $("#address").val();
+      currentDriverData.pword = $("#pword").val();
+      currentDriverData.fn = $("#fn").val();
+      currentDriverData.mt = $("#mt").val();
+      currentDriverData.available = $("#available").prop("checked"); 
 
-    // Check if a new profile picture was selected
-    const profilePictureInput = document.getElementById("profilePicture");
-    const newProfilePictureFile = profilePictureInput.files[0];
+      // Check if a new profile picture was selected
+      const profilePictureInput = document.getElementById("profilePicture");
+      const newProfilePictureFile = profilePictureInput.files[0];
 
-    if (newProfilePictureFile) {
-      // Upload the new profile picture to Firebase Storage
-      const storage = firebase.storage();
-      const storageRef = storage.ref();
-      const profilePictureRef = storageRef.child("profilePictures/" + driverId);
+      if (newProfilePictureFile) {
+        // Upload the new profile picture to Firebase Storage
+        const storage = firebase.storage();
+        const storageRef = storage.ref();
+        const profilePictureRef = storageRef.child("profilePictures/" + driverId);
 
-      profilePictureRef.put(newProfilePictureFile).then((snapshot) => {
-        snapshot.ref.getDownloadURL().then((downloadURL) => {
-          currentDriverData.profilePictureURL = downloadURL;
+        profilePictureRef.put(newProfilePictureFile).then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((downloadURL) => {
+            currentDriverData.profilePictureURL = downloadURL;
 
-          // Update the data in Firebase
-          databaseRef.set(currentDriverData)
-            .then(function() {
-              alert("Driver Data and Profile Picture updated successfully.");
-              
-              $("#cancel-update-btn").click();
-            })
-            .catch(function(error) {
-              console.error("Error: ", error);
-              alert("An error occurred while updating the driver data.");
-            });
+            // Update the data in Firebase
+            databaseRef.set(currentDriverData)
+              .then(function() {
+                alert("Driver Data and Profile Picture updated successfully.");
+                
+                $("#cancel-update-btn").click();
+              })
+              .catch(function(error) {
+                console.error("Error: ", error);
+                alert("An error occurred while updating the driver data.");
+              });
+          });
         });
-      });
-    } else {
-      // If no new profile picture was selected, update the data without uploading a new picture
-      databaseRef.set(currentDriverData)
-        .then(function() {
-          alert("Driver Data updated successfully.");
-         
-          $("#cancel-update-btn").click();
-        })
-        .catch(function(error) {
-          console.error("Error: ", error);
-          alert("An error occurred while updating the driver data.");
-        });
-    }
+      } else {
+        // If no new profile picture was selected, update the data without uploading a new picture
+        databaseRef.set(currentDriverData)
+          .then(function() {
+            alert("Driver Data updated successfully.");
+          
+            $("#cancel-update-btn").click();
+          })
+          .catch(function(error) {
+            console.error("Error: ", error);
+            alert("An error occurred while updating the driver data.");
+          });
+      }
+    });
   });
-});
 
 });
 
@@ -383,6 +383,42 @@ function userclearDataRows() {
 }
 });
 
+/*Search Reports in database */
+$(document).ready(function () {
+  $("#searchReportInput").on("input", function () {
+    const searchQuery = $(this).val().toLowerCase();
+    filterAndDisplayUserData(searchQuery);
+  });
+  function filterAndDisplayUserData(searchQuery) {
+  const databaseRef = firebase.database().ref("active_bookings/");
+
+  userclearDataRows();
+
+  databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      const userData = childSnapshot.val();
+
+      if (
+        userData.driverID.fullname.toLowerCase().includes(searchQuery) ||
+        userData.userRating.toLowerCase().includes(searchQuery) ||
+        userData.userReport.toLowerCase().includes(searchQuery) ||
+        userData.booking_time.toLowerCase().includes(searchQuery)
+      ) {
+        const newrow = $("<tr>");
+        newrow.append($("<td>").text(userData.driverID.fullname));
+        newrow.append($("<td>").text(userData.userRating));
+        newrow.append($("<td>").text(userData.userReport));
+        newrow.append($("<td>").text(userData.booking_time));
+
+        $(".reportTableBody").append(newrow);
+      }
+    });
+  });
+}
+function userclearDataRows() {
+  $('.reportTableBody').find("tr:gt(0)").remove();
+}
+});
 
 /*Reports Read Method */
 $(document).ready(function(){
@@ -410,40 +446,6 @@ $(document).ready(function(){
   });
 });
 
-/*Search Reports in database */
-// $(document).ready(function () {
-//   $("#searchReportInput").on("input", function () {
-//     const searchQuery = $(this).val().toLowerCase();
-//     filterAndDisplayReportData(searchQuery);
-//   });
-//   function filterAndDisplayReportData(searchQuery) {
-//   const databaseRef = firebase.database().ref("active_bookings/");
 
-//     reportclearDataRows(); 
 
-//     databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
-//       snapshot.forEach(function (childSnapshot) {
-//         const reportData = childSnapshot.val();
-
-//         if (
-//           reportData.driverID.firstname.toLowerCase().includes(searchQuery) ||
-//           reportData.userRating.toLowerCase().includes(searchQuery) ||
-//           reportData.userReport.toLowerCase().includes(searchQuery) ||
-//           reportData.booking_time.toLowerCase().includes(searchQuery)
-//         ) {
-//           const newreportrow = $("<tr>");
-//           newreportrow.append($("<td>").text(reportData.driverID.fullname));
-//           newreportrow.append($("<td>").text(reportData.userRating));
-//           newreportrow.append($("<td>").text(reportData.userReport));
-//           newreportrow.append($("<td>").text(reportData.booking_time));
-
-//           $(".reportTableBody").append(newreportrow);
-//         }
-//       });
-//     });
-//   }
-//   function reportclearDataRows() {
-//     $('.reportTableBody').find("tr:gt(0)").remove();
-//   }
-// });
 
