@@ -23,6 +23,7 @@ const firebaseConfig = {
     const pword = $("#pword").val();
     const fn = $("#fn").val();
     const plateNo = $("#plateNo").val();
+    const occ = $("#occ").val();
     const mt = $("#mt").val();
     const available = document.getElementById('available').checked;
     const profilePictureInput = document.getElementById("profilePicture");
@@ -58,6 +59,7 @@ const firebaseConfig = {
           pword: pword,
           fn: fn,
           plateNo: plateNo,
+          occ: occ,
           mt: mt,
           available: available,
           profilePictureURL: downloadURL
@@ -74,6 +76,7 @@ const firebaseConfig = {
         document.getElementById("pword").value = "";
         document.getElementById("fn").value = "";
         document.getElementById("plateNo").value = "";
+        document.getElementById("occ").value = "";
         document.getElementById("mt").value = "";
         document.getElementById("available").value = "";
 
@@ -109,6 +112,7 @@ $(document).ready(function(){
       row.append($("<td>").text(driverData.address));
       row.append($("<td>").text(driverData.fn));
       row.append($("<td>").text(driverData.plateNo));
+      row.append($("<td>").text(driverData.occ));
       row.append($("<td>").text(driverData.mt));
 
       const qrCell = $("<td>");
@@ -221,6 +225,7 @@ function populateUpdateModal(plateNo) {
     $("#uppword").val(driverData.pword);
     $("#upfn").val(driverData.fn);
     $("#upplateNo").val(driverData.plateNo);
+    $("#upocc").val(driverData.occ);
     $("#upmt").val(driverData.mt);
 
     const upavailableCheckbox = document.getElementById("upavailable");
@@ -239,6 +244,7 @@ function populateUpdateModal(plateNo) {
       const updatedPword = $("#uppword").val();
       const updatedFn = $("#upfn").val();
       const updatedPlateNo = $("#upplateNo").val();
+      const updatedocc = $("#upocc").val();
       const updatedMt = $("#upmt").val();
       const updatedAvailable = document.getElementById("upavailable").checked;
 
@@ -251,6 +257,7 @@ function populateUpdateModal(plateNo) {
         address: updatedAddress,
         pword: updatedPword,
         fn: updatedFn,
+        occ: updatedocc,
         mt: updatedMt,
         available: updatedAvailable,
       }, function(error) {
@@ -356,6 +363,7 @@ function fetchDriverData(plateNo) {
       $("#contact-data").text(driverData.conNum);
       $("#email-data").text(driverData.email);
       $("#franNo-data").text(driverData.fn);
+      $("#occ-data").text(driverData.occ);
       $("#motor-data").text(driverData.mt);
     } else {
       console.error("Driver not found");
