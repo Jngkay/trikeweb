@@ -67,7 +67,7 @@
     border: solid 1px black;
     cursor: pointer;
 }
-.update-modal .update-modal-content form .buttons #cancel-btn:hover{
+.update-modal .update-modal-content form .buttons #cancel-update-btn:hover{
     color: white;
     background-color: red;
 
