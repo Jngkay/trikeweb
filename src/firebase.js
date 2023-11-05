@@ -30,10 +30,13 @@ const firebaseConfig = {
 
     if (!profilePictureFile) {
       alert("Please select Profile Picture when you ADD a Driver.");
+      document.getElementById("lightBox-loader").style.display = "none";
+      return;
     } 
 
     if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || plateNo === '' || mt === '') {
       alert("Please fill in all fields before submitting.");
+      document.getElementById("lightBox-loader").style.display = "none";
       return;
     }
 
