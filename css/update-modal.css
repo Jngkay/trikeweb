@@ -90,7 +90,7 @@
 }
 
 /* Style the "Available" checkbox */
-.update-modal-content input[type="checkbox"]#available {
+.update-modal-content input[type="checkbox"]#upavailable {
     margin-top: 10px; /* Adjust as needed */
     margin-right: 5px; /* Adjust as needed */
     vertical-align: middle;
@@ -103,7 +103,7 @@
 }
 
 /* Style the "Available" checkbox appearance */
-.update-modal-content input[type="checkbox"]#available {
+.update-modal-content input[type="checkbox"]#upavailable {
     /* Hide the default checkbox appearance */
     appearance: none;
     -webkit-appearance: none;
@@ -115,7 +115,7 @@
     cursor: pointer;
 }
 
-.update-modal-content input[type="checkbox"]#available:checked {
+.update-modal-content input[type="checkbox"]#upavailable:checked {
     background-color: green;
     border: 1px solid black;
 }

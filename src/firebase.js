@@ -29,13 +29,8 @@ const firebaseConfig = {
     const profilePictureFile = profilePictureInput.files[0];
 
     if (!profilePictureFile) {
-      const confirmation = window.confirm("Please select a profile picture when you ADD a Driver. Click 'Cancel' when UPDATING.");
-      if (!confirmation) {
-        // User clicked 'Cancel'
-        return;
-      }
-      // alert("Please select Profile Picture when you ADD a Driver. Just click 'Ok' when updating.");
-    }    
+      alert("Please select Profile Picture when you ADD a Driver.");
+    } 
 
     if (fullname === '' || email === '' || conNum === '' || address === '' || pword === '' || fn === '' || plateNo === '' || mt === '') {
       alert("Please fill in all fields before submitting.");
@@ -203,72 +198,75 @@ function userclearDataRows() {
 
 
 /*Update Method */
-$(".tableBody").on("click", ".edit-btn", function() {
-  const selectedRow = $(this).closest("tr");
-  
-  // Get the driver ID 
-  const driverId = selectedRow.find("td:eq(6)").text(); // Change 3 to the appropriate column index
-  
-  // Fetch data for the selected driver from Firebase
-  const databaseRef = firebase.database().ref("drivers/" + driverId);
-  databaseRef.once('value', (snapshot) => {
+$(document).on("click", ".edit-btn", function() {
+  const plateNo = $(this).attr("data-plate-no"); 
+  populateUpdateModal(plateNo); 
+});
+
+function populateUpdateModal(plateNo) {
+  const databaseRef = firebase.database().ref("drivers/");
+  const updateDriverForm = $("#update-driver-form");
+
+  databaseRef.child(plateNo).once("value", function(snapshot) {
     const driverData = snapshot.val();
-    
-    $("#fullname").val(driverData.fullname);
-    $("#email").val(driverData.email);
-    $("#conNum").val(driverData.conNum);
-    $("#address").val(driverData.address);
-    $("#pword").val(driverData.pword);
-    $("#fn").val(driverData.fn);
-    $("#plateNo").val(driverData.plateNo);
-    $("#mt").val(driverData.mt);
-    $("#available").prop("checked", driverData.available); 
 
-    // Show the existing profile picture
-    const profilePictureUrl = driverData.profilePictureURL;
-    $(".current-profile-picture").attr("src", profilePictureUrl);
+    // Set the values in the update modal fields
+    $("#upfullname").val(driverData.fullname);
+    $("#upemail").val(driverData.email);
+    $("#upconNum").val(driverData.conNum);
+    $("#upaddress").val(driverData.address);
+    $("#uppword").val(driverData.pword);
+    $("#upfn").val(driverData.fn);
+    $("#upplateNo").val(driverData.plateNo);
+    $("#upmt").val(driverData.mt);
 
-    // Show the modal in "Edit" mode
-    $("#submit-btn").text("Update"); // Change button text to "Update"
-    // Enable the profile picture input for updates
-    $("#profilePicture").prop("disabled", true);
-    
-    $("#AddDriverModal").show();
+    const upavailableCheckbox = document.getElementById("upavailable");
+    upavailableCheckbox.checked = driverData.available;
+
+    // Display the update modal
+    $("#UpdateDriverModal").show();
+
+    // Event listener for the update form submission
+    updateDriverForm.off("submit").on("submit", function(e) {
+      e.preventDefault();
+      const updatedFullname = $("#upfullname").val();
+      const updatedEmail = $("#upemail").val();
+      const updatedConNum = $("#upconNum").val();
+      const updatedAddress = $("#upaddress").val();
+      const updatedPword = $("#uppword").val();
+      const updatedFn = $("#upfn").val();
+      const updatedPlateNo = $("#upplateNo").val();
+      const updatedMt = $("#upmt").val();
+      const updatedAvailable = document.getElementById("upavailable").checked;
+
+      // Update the driver's data in Firebase
+      const databaseRef = firebase.database().ref("drivers/" + updatedPlateNo);
+      databaseRef.update({
+        fullname: updatedFullname,
+        email: updatedEmail,
+        conNum: updatedConNum,
+        address: updatedAddress,
+        pword: updatedPword,
+        fn: updatedFn,
+        mt: updatedMt,
+        available: updatedAvailable,
+      }, function(error) {
+        if (error) {
+          alert("Failed to update data. Please try again.");
+        } else {
+          alert("Data has been updated successfully!");
+
+          $("#UpdateDriverModal").hide();
+        }
+      });
+
+    });
+    // Close button in the update modal
+    $(".update-modal-close").on("click", function() {
+    $("#UpdateDriverModal").hide();
   });
-});
-
-// Update data in Firebase when the modal is submitted in "Edit" mode
-$("#submit-btn").click(function(e) {
-  e.preventDefault();
-  
-  const driverId = $("#plateNo").val(); 
-  
-  // Fetch the current data for the driver from Firebase
-  const databaseRef = firebase.database().ref("drivers/" + driverId);
-  databaseRef.once('value', (snapshot) => {
-    const currentDriverData = snapshot.val();
-    
-    currentDriverData.fullname = $("#fullname").val();
-    currentDriverData.email = $("#email").val();
-    currentDriverData.conNum = $("#conNum").val();
-    currentDriverData.address = $("#address").val();
-    currentDriverData.pword = $("#pword").val();
-    currentDriverData.fn = $("#fn").val();
-    currentDriverData.mt = $("#mt").val();
-    currentDriverData.available = $("#available").prop("checked"); 
-
-     // Update the data in Firebase
-     databaseRef.set(currentDriverData)
-     .then(function() {
-       alert("Driver Data updated successfully.");
-       $("#cancel-btn").click();
-     })
-     .catch(function(error) {
-       console.error("Error: ", error);
-       alert("An error occurred while updating the driver data.");
-     });
   });
-});
+}
 
 
 
