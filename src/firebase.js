@@ -372,6 +372,7 @@ $(document).ready(function () {
   $("#searchReportInput").on("input", function () {
     const searchQuery = $(this).val().toLowerCase();
     filterAndDisplayReportData(searchQuery);
+    console.log("Search Query:", searchQuery); 
   });
   function filterAndDisplayReportData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
@@ -381,11 +382,10 @@ $(document).ready(function () {
   databaseRef.orderByChild("booking_time").on("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
       const reportData = childSnapshot.val();
+      console.log("Report Data:", reportData);
 
       if (
         reportData.driverID.fullname.toLowerCase().includes(searchQuery) ||
-        reportData.userRating.tostring().toLowerCase().includes(searchQuery) ||
-        reportData.userReport.toLowerCase().includes(searchQuery) ||
         reportData.booking_time.toLowerCase().includes(searchQuery)
       ) {
         const newrow = $("<tr>");
@@ -400,6 +400,7 @@ $(document).ready(function () {
   });
 }
 });
+
 
 
 /*Reports Read Method */
