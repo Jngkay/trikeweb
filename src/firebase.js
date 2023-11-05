@@ -371,9 +371,9 @@ function fetchDriverData(plateNo) {
 $(document).ready(function () {
   $("#searchReportInput").on("input", function () {
     const searchQuery = $(this).val().toLowerCase();
-    filterAndDisplayUserData(searchQuery);
+    filterAndDisplayReportData(searchQuery);
   });
-  function filterAndDisplayUserData(searchQuery) {
+  function filterAndDisplayReportData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
 
   $('.reportTableBody').find("tr:gt(0)").remove();
@@ -384,18 +384,14 @@ $(document).ready(function () {
 
       if (
         reportData.driverID.fullname.toLowerCase().includes(searchQuery) ||
-        reportData.userRating.toString().toLowerCase().includes(searchQuery) ||
+        reportData.userRating.tostring().toLowerCase().includes(searchQuery) ||
         reportData.userReport.toLowerCase().includes(searchQuery) ||
         reportData.booking_time.toLowerCase().includes(searchQuery)
       ) {
         const newrow = $("<tr>");
         newrow.append($("<td>").text(reportData.driverID.fullname));
-        newrow.append($("<td>").text(reportData.userRating || 0))
-        if (reportData.userReport && reportData.userReport.trim() !== "") {
-          newrow.append($("<td>").text(reportData.userReport));
-        } else {
-          newrow.append($("<td>").text("N/A"));
-        }
+        newrow.append($("<td>").text(reportData.userRating || 0));
+        newrow.append($("<td>").text(reportData.userReport || "N/A"));
         newrow.append($("<td>").text(reportData.booking_time));
 
         $(".reportTableBody").append(newrow);
@@ -424,11 +420,7 @@ $(document).ready(function(){
 
       newrow.append($("<td>").text(reportData.driverID.fullname));
       newrow.append($("<td>").text(reportData.userRating || 0))
-      if (reportData.userReport && reportData.userReport.trim() !== "") {
-        newrow.append($("<td>").text(reportData.userReport));
-      } else {
-        newrow.append($("<td>").text("N/A"));
-      }
+      newrow.append($("<td>").text(reportData.userReport || "N/A"));
       newrow.append($("<td>").text(reportData.booking_time));
 
       reportTableBody.append(newrow);
