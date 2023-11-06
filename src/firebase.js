@@ -384,6 +384,7 @@ $(document).ready(function () {
   });
   function filterAndDisplayReportData(searchQuery) {
   const databaseRef = firebase.database().ref("active_bookings/");
+  const usersRef = firebase.database().ref("users/"); 
 
   $('.reportTableBody').find("tr:gt(0)").remove();
 
@@ -397,13 +398,21 @@ $(document).ready(function () {
         reportData.booking_time.toLowerCase().includes(searchQuery)
       ) {
         const newrow = $("<tr>");
+
+        const userId = reportData.userId;
+          usersRef.child(userId).once("value", function(userSnapshot) {
+          const userData = userSnapshot.val();
+          const fullName = userData.firstname + " " + userData.lastname;
+        
+        newrow.append($("<td>").text(fullName));
+        newrow.append($("<td>").text(reportData.userReport || "N/A"));
         newrow.append($("<td>").text(reportData.driverID.fullname));
         newrow.append($("<td>").text(reportData.userRating || 0));
-        newrow.append($("<td>").text(reportData.userReport || "N/A"));
         newrow.append($("<td>").text(reportData.booking_time));
 
         $(".reportTableBody").append(newrow);
-      }
+      });
+    }
     });
   });
 }
@@ -413,29 +422,40 @@ $(document).ready(function () {
 
 /*Reports Read Method */
 $(document).ready(function(){
-  const databaseRef = firebase.database().ref("active_bookings/");
+  const activeBookingsRef = firebase.database().ref("active_bookings/");
+  const usersRef = firebase.database().ref("users/"); 
   const reportTableBody = $(".reportTableBody"); 
 
   function reportclearDataRows() {
     reportTableBody.find("tr:gt(0)").remove();
   }
 
-  databaseRef.orderByChild("booking_time").on("value", function(snapshot) {
+  activeBookingsRef.orderByChild("booking_time").on("value", function(snapshot) {
     reportclearDataRows(); 
 
     snapshot.forEach(function(childSnapshot) {
       const reportData = childSnapshot.val();
       const newrow = $("<tr>");
 
-      newrow.append($("<td>").text(reportData.driverID.fullname));
-      newrow.append($("<td>").text(reportData.userRating || 0))
-      newrow.append($("<td>").text(reportData.userReport || "N/A"));
-      newrow.append($("<td>").text(reportData.booking_time));
+      const userId = reportData.userId;
+      usersRef.child(userId).once("value", function(userSnapshot) {
+        const userData = userSnapshot.val();
+        const fullName = userData.firstname + " " + userData.lastname;
+        
+        newrow.append($("<td>").text(fullName));
+        newrow.append($("<td>").text(reportData.userReport || "N/A"));
+        newrow.append($("<td>").text(reportData.driverID.fullname));
+        newrow.append($("<td>").text(reportData.userRating || 0))
+        newrow.append($("<td>").text(reportData.booking_time));
 
-      reportTableBody.append(newrow);
+        reportTableBody.append(newrow);
+      });
     });
   });
 });
+
+
+
 
 
 
