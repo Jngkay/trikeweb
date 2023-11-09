@@ -163,7 +163,11 @@ $(document).ready(function(){
       newrow.append($("<td>").text(userData.email));
       newrow.append($("<td>").text(userData.phone));
 
+
       const actionCell_user = $("<td>");
+      actionCell_user.append($("<button>").text("Edit").click(function() {
+        editUser(userId); 
+      }));
       actionCell_user.append($("<button>").text("Delete").click(function() {
         deleteUser(userId); 
       }));
@@ -311,7 +315,7 @@ function deleteDriver(driverId) {
 }
 
 function deleteUser(userId) {
-  if (confirm("Are you sure you want to delete this driver?")) {
+  if (confirm("Are you sure you want to delete this user?")) {
     const databaseRef = firebase.database().ref("users/");
     const driverRef = databaseRef.child(userId);
 
