@@ -158,7 +158,6 @@ $(document).ready(function(){
       const userId = childSnapshot.key; // Get the parent user ID
       const newrow = $("<tr>");
       
-      newrow.append($("<td>").text(userId)); // Add user ID column
       newrow.append($("<td>").text(userData.firstname));
       newrow.append($("<td>").text(userData.lastname));
       newrow.append($("<td>").text(userData.email));
@@ -166,7 +165,7 @@ $(document).ready(function(){
 
       const actionCell_user = $("<td>");
       actionCell_user.append($("<button>").text("Delete").click(function() {
-        deleteUser(userId); // Pass userId to deleteUser function
+        deleteUser(userId); 
       }));
       
       newrow.append(actionCell_user);
