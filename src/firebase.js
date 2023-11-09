@@ -324,6 +324,7 @@ function deleteDriver(driverId) {
 
 
 function editUser(userID, fName, lName, userEmail, userPhone){
+  $("#userIDupdate").val(userID);
   $("#userFName").val(fName);
   $("#userLName").val(lName);
   $("#userFName").val(email);
