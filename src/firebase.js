@@ -327,8 +327,8 @@ function editUser(userID, fName, lName, userEmail, userPhone){
   $("#userIDupdate").val(userID);
   $("#userFName").val(fName);
   $("#userLName").val(lName);
-  $("#userFName").val(userEmail);
-  $("#userFName").val(userPhone);
+  $("#userEmail").val(userEmail);
+  $("#userPhone").val(userPhone);
   $("#editUserModal").show();
 }
 
