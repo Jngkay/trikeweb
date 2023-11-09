@@ -319,7 +319,6 @@ function deleteDriver(driverId) {
 
 function editUser(userID){
   $("#editUserModal").show();
-  alert("test");
 }
 
 function deleteUser(userId) {
