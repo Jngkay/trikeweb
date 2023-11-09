@@ -168,6 +168,8 @@ $(document).ready(function(){
       actionCell_user.append($("<button>").text("Edit").click(function() {
         editUser(userId); 
       }));
+      actionCell_user.append($("<span>").text(" "));
+      
       actionCell_user.append($("<button>").text("Delete").click(function() {
         deleteUser(userId); 
       }));
