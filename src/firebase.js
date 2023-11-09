@@ -155,22 +155,26 @@ $(document).ready(function(){
 
     snapshot.forEach(function(childSnapshot) {
       const userData = childSnapshot.val();
+      const userId = childSnapshot.key; // Get the parent user ID
       const newrow = $("<tr>");
-      newrow.append($("<td>").text(userData));
+      
+      newrow.append($("<td>").text(userId)); // Add user ID column
+      newrow.append($("<td>").text(userData.firstname));
       newrow.append($("<td>").text(userData.lastname));
       newrow.append($("<td>").text(userData.email));
       newrow.append($("<td>").text(userData.phone));
 
       const actionCell_user = $("<td>");
       actionCell_user.append($("<button>").text("Delete").click(function() {
-        deleteDriver(userData.firstname);
+        deleteUser(userId); // Pass userId to deleteUser function
       }));
-      alert(userData);
+      
       newrow.append(actionCell_user);
       userTableBody.append(newrow);
     });
   });
 });
+
 
 /*Search Users in database */
 $(document).ready(function () {
@@ -299,6 +303,22 @@ function deleteDriver(driverId) {
     driverRef.remove()
       .then(function() {
         alert("Driver Data deleted successfully.");
+      })
+      .catch(function(error) {
+        console.error("Error: ", error);
+        alert("An error occurred while deleting the driver.");
+      });
+  }
+}
+
+function deleteUser(userId) {
+  if (confirm("Are you sure you want to delete this driver?")) {
+    const databaseRef = firebase.database().ref("users/");
+    const driverRef = databaseRef.child(userId);
+
+    driverRef.remove()
+      .then(function() {
+        alert("User Data deleted successfully.");
       })
       .catch(function(error) {
         console.error("Error: ", error);
