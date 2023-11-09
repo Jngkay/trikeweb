@@ -317,7 +317,7 @@ function deleteDriver(driverId) {
 }
 
 function editUser(userID){
-  console.log(userID);
+  $("#qrModalView").show();
 }
 
 function deleteUser(userId) {
