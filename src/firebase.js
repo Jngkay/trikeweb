@@ -160,6 +160,14 @@ $(document).ready(function(){
       newrow.append($("<td>").text(userData.lastname));
       newrow.append($("<td>").text(userData.email));
       newrow.append($("<td>").text(userData.phone));
+
+      const actionCell_user = $("<td>");
+      actionCell_user.append($("<button>").text("Delete").click(function() {
+        deleteDriver(driverData.plateNo);
+      }));
+
+
+      
       newrow.append($("<button>").text("Delete").click(function() {
         deleteDriver(driverData.plateNo);
       }));
