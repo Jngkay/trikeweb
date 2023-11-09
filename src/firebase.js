@@ -180,7 +180,13 @@ $(document).ready(function(){
   });
 });
 
+$(".editClose").on("click", function() {
+    $("#editUserModal").hide();
+});
 
+
+
+  
 /*Search Users in database */
 $(document).ready(function () {
   $("#searchUserInput").on("input", function () {
@@ -323,6 +329,27 @@ function editUser(userID, fName, lName, userEmail, userPhone){
   $("#userFName").val(email);
   $("#userFName").val(phone);
   $("#editUserModal").show();
+}
+
+
+function updateUser(){
+  var userIDupdate = $("#userIDupdate").val();
+  
+  const databaseRef = firebase.database().ref("users/" + userIDupdate);
+      databaseRef.update({
+        firstname: $("#userFName").val(),
+        lastname: $("#userLName").val(),
+        email: $("#userEmail").val(),
+        phone: $("#userPhone").val(),
+      }, function(error) {
+        if (error) {
+          alert("Failed to update data. Please try again.");
+        } else {
+          alert("Data has been updated successfully!");
+
+          $("#editUserModal").hide();
+        }
+      });
 }
 
 function deleteUser(userId) {
