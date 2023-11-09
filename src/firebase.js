@@ -166,7 +166,7 @@ $(document).ready(function(){
 
       const actionCell_user = $("<td>");
       actionCell_user.append($("<button>").text("Edit").click(function() {
-        editUser(userId); 
+        editUser(userId, userData.firstname, userData.lastname, userData.email, userData.phone); 
       }));
       actionCell_user.append($("<span>").text(" "));
       
@@ -317,7 +317,11 @@ function deleteDriver(driverId) {
 }
 
 
-function editUser(userID){
+function editUser(userID, fName, lName, userEmail, userPhone){
+  $("#userFName").val(fName);
+  $("#userLName").val(lName);
+  $("#userFName").val(email);
+  $("#userFName").val(phone);
   $("#editUserModal").show();
 }
 
