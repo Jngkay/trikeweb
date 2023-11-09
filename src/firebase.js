@@ -316,8 +316,10 @@ function deleteDriver(driverId) {
   }
 }
 
+
 function editUser(userID){
   $("#qrModalView").show();
+  alert("test");
 }
 
 function deleteUser(userId) {
