@@ -316,6 +316,10 @@ function deleteDriver(driverId) {
   }
 }
 
+function editUser(userID){
+  console.log(userID);
+}
+
 function deleteUser(userId) {
   if (confirm("Are you sure you want to delete this user?")) {
     const databaseRef = firebase.database().ref("users/");
