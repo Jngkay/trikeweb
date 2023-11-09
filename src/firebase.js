@@ -160,7 +160,7 @@ $(document).ready(function(){
       newrow.append($("<td>").text(userData.lastname));
       newrow.append($("<td>").text(userData.email));
       newrow.append($("<td>").text(userData.phone));
-      newrow.append($("<td><button>").text("Delete").click(function() {
+      newrow.append($("<button>").text("Delete").click(function() {
         deleteDriver(driverData.plateNo);
       }));
       userTableBody.append(newrow);
