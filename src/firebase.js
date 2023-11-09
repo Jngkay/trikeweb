@@ -165,12 +165,8 @@ $(document).ready(function(){
       actionCell_user.append($("<button>").text("Delete").click(function() {
         deleteDriver(driverData.plateNo);
       }));
-
-
-      
-      newrow.append($("<button>").text("Delete").click(function() {
-        deleteDriver(driverData.plateNo);
-      }));
+  
+      newrow.append(actionCell_user);
       userTableBody.append(newrow);
     });
   });
