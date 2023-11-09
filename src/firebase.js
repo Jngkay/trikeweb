@@ -156,7 +156,7 @@ $(document).ready(function(){
     snapshot.forEach(function(childSnapshot) {
       const userData = childSnapshot.val();
       const newrow = $("<tr>");
-      newrow.append($("<td>").text(userData.firstname));
+      newrow.append($("<td>").text(userData));
       newrow.append($("<td>").text(userData.lastname));
       newrow.append($("<td>").text(userData.email));
       newrow.append($("<td>").text(userData.phone));
