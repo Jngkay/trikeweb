@@ -163,7 +163,7 @@ $(document).ready(function(){
 
       const actionCell_user = $("<td>");
       actionCell_user.append($("<button>").text("Delete").click(function() {
-        deleteDriver(driverData.plateNo);
+        deleteDriver(userData.firstname);
       }));
   
       newrow.append(actionCell_user);
