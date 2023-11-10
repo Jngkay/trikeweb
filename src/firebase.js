@@ -180,7 +180,7 @@ $(document).ready(function(){
   });
 });
 
-$(".editClose").on("click", function() {
+$("#editClose").on("click", function() {
     $("#editUserModal").hide();
 });
 
