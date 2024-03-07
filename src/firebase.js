@@ -413,8 +413,7 @@ $(document).ready(function(){
     snapshot.forEach((childSnapshot) => {
       const bookingData = childSnapshot.val();
       
-      // Assuming there is a field called "booking_status" which indicates the status of the booking
-      if (bookingData.bookingStatus !== "Done" && bookingData.bookingStatus !== "Completed"  ) {
+      if (bookingData.bookingStatus == "Accepted" ) {
         ongoingBookingsCount++;
       }
     });
