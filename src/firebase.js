@@ -407,19 +407,19 @@ $(document).ready(function(){
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("active_bookings/"); // Assuming bookings are stored in the "bookings" node
   
-  let ongoingBookingsCount = 0;
+  let bookingsCount = 0;
 
   databaseRef.once('value', (snapshot) => {
     snapshot.forEach((childSnapshot) => {
       const bookingData = childSnapshot.val();
       
       if (bookingData.bookingStatus == "Accepted" ) {
-        ongoingBookingsCount++;
+        bookingsCount++;
       }
     });
   
     $(".bookingsCount").html(bookingsCount);
-    console.log("Pending Bookings Count: " + bookingsCount);
+    console.log("Active Bookings Count: " + bookingsCount);
   });
 });
 
