@@ -393,17 +393,6 @@ $(document).ready(function(){
 });
 
 // Fetch the count of active bookings
-// $(document).ready(function(){
-//   const databaseRef = firebase.database().ref("active_bookings/");
-
-//   databaseRef.once('value', (snapshot) => {
-//     const bookingsCount = snapshot.numChildren();
-  
-//     $(".bookingsCount").html(bookingsCount);
-//     console.log("Bookings Count: " + bookingsCount);
-//   });
-// })
-
 $(document).ready(function(){
   const databaseRef = firebase.database().ref("active_bookings/"); // Assuming bookings are stored in the "bookings" node
   
