@@ -414,7 +414,7 @@ $(document).ready(function(){
       const bookingData = childSnapshot.val();
       
       // Assuming there is a field called "booking_status" which indicates the status of the booking
-      if (bookingData.booking_status !== "Done" && bookingData.booking_status !== "Completed"  ) {
+      if (bookingData.bookingStatus !== "Done" && bookingData.booking_status !== "Completed"  ) {
         ongoingBookingsCount++;
       }
     });
