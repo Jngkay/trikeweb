@@ -393,16 +393,37 @@ $(document).ready(function(){
 });
 
 // Fetch the count of active bookings
+// $(document).ready(function(){
+//   const databaseRef = firebase.database().ref("active_bookings/");
+
+//   databaseRef.once('value', (snapshot) => {
+//     const bookingsCount = snapshot.numChildren();
+  
+//     $(".bookingsCount").html(bookingsCount);
+//     console.log("Bookings Count: " + bookingsCount);
+//   });
+// })
+
 $(document).ready(function(){
-  const databaseRef = firebase.database().ref("active_bookings/");
+  const databaseRef = firebase.database().ref("active_bookings/"); // Assuming bookings are stored in the "bookings" node
+  
+  let ongoingBookingsCount = 0;
 
   databaseRef.once('value', (snapshot) => {
-    const bookingsCount = snapshot.numChildren();
+    snapshot.forEach((childSnapshot) => {
+      const bookingData = childSnapshot.val();
+      
+      // Assuming there is a field called "booking_status" which indicates the status of the booking
+      if (bookingData.booking_status !== "Done" && bookingData.booking_status !== "Completed"  ) {
+        ongoingBookingsCount++;
+      }
+    });
   
     $(".bookingsCount").html(bookingsCount);
-    console.log("Bookings Count: " + bookingsCount);
+    console.log("Pending Bookings Count: " + bookingsCount);
   });
-})
+});
+
 
 
 
